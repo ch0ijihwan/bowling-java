@@ -47,10 +47,10 @@ class PinCountsTest {
         PinCount input = new PinCount(2);
         List<PinCount> expect = List.of(new PinCount(1), new PinCount(2));
         //when
-        pinCounts.add(input);
+        PinCounts addPinCounts = pinCounts.add(input);
 
         //then
-        assertThat(pinCounts).hasFieldOrPropertyWithValue("pinCounts", expect);
+        assertThat(addPinCounts).hasFieldOrPropertyWithValue("pinCounts", expect);
     }
 
     @Test
@@ -59,7 +59,7 @@ class PinCountsTest {
         //given
         List<PinCount> pinCountList = List.of(new PinCount(1), new PinCount(8));
         PinCounts pinCounts = new PinCounts(pinCountList);
-        int expect = 3;
+        int expect = 9;
 
         //when
         int actual = pinCounts.calculatePinCounts();
