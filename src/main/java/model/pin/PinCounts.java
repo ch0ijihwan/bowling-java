@@ -6,6 +6,9 @@ import java.util.Objects;
 
 public class PinCounts {
 
+    private static final int FIRST_INDEX = 0;
+    private static final int MAXIMUM_PIN_COUNT = 10;
+
     private final List<PinCount> pinCounts;
 
     public PinCounts(final List<PinCount> pinCounts) {
@@ -28,8 +31,26 @@ public class PinCounts {
     }
 
     public PinCounts add(final PinCount input) {
+        if(this.isStrike()){
+            throw new IllegalArgumentException("스트라이크 이후에는 투구를 할 수 없습니다.");
+        }
         this.pinCounts.add(input);
         return new PinCounts(this.getPinCounts());
+    }
+
+    public boolean isStrike() {
+        return pinCounts.get(FIRST_INDEX)
+                .isStrike();
+    }
+
+    public boolean isSpare() {
+        return sumPinCountValues() == MAXIMUM_PIN_COUNT;
+    }
+
+    private int sumPinCountValues() {
+        return pinCounts.stream()
+                .mapToInt(PinCount::getValue)
+                .sum();
     }
 
     @Override

@@ -2,10 +2,15 @@ package model.pin;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.List;
+import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 class PinCountsTest {
 
@@ -66,5 +71,50 @@ class PinCountsTest {
 
         //then
         assertThat(actual).isEqualTo(expect);
+    }
+
+    @ParameterizedTest
+    @DisplayName("스페어인지 확인한다.")
+    @MethodSource("sparePinCountsParameterProvider")
+    void isSpare(final PinCounts pinCounts, final boolean expect) {
+        //when
+        boolean actual = pinCounts.isSpare();
+
+        //then
+        assertThat(actual).isEqualTo(expect);
+    }
+
+    private static Stream<Arguments> sparePinCountsParameterProvider() {
+        return Stream.of(
+                Arguments.of(new PinCounts(List.of(new PinCount(2), new PinCount(8))), true),
+                Arguments.of(new PinCounts(List.of(new PinCount(5), new PinCount(4))), false));
+    }
+
+    @ParameterizedTest
+    @DisplayName("스트라이크 인지 확인한다.")
+    @MethodSource("strikePinCountsParameterProvider")
+    void isStrike(final PinCounts pinCounts, final boolean expect) {
+        //when
+        boolean actual = pinCounts.isStrike();
+
+        //then
+        assertThat(actual).isEqualTo(expect);
+    }
+
+    private static Stream<Arguments> strikePinCountsParameterProvider() {
+        return Stream.of(
+                Arguments.of(new PinCounts(List.of(new PinCount(10), new PinCount(0))), true),
+                Arguments.of(new PinCounts(List.of(new PinCount(5), new PinCount(4))), false));
+    }
+
+    @Test
+    @DisplayName("스트라이크 인경우 투구를 할 수 없다.")
+    void validateAddPinCount() {
+        //given
+        PinCounts pinCounts = new PinCounts(List.of(new PinCount(10)));
+
+        //then
+        assertThatIllegalArgumentException().isThrownBy(() -> pinCounts.add(new PinCount(1)))
+                .withMessage("스트라이크 이후에는 투구를 할 수 없습니다.");
     }
 }
