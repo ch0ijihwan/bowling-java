@@ -17,7 +17,7 @@ public class PinCount {
 
     private void validateSize(final int pinCount) {
         if (pinCount < MINIMUM_PIN_COUNT || MAXIMUM_PIN_COUNT < pinCount) {
-            throw new IllegalArgumentException("쓰러트린 볼링 핀의 갯수는 10을 넘을 수 없는 양수입니다.");
+            throw new IllegalArgumentException("쓰러트린 볼링 핀의 갯수는 10 이하의 양수입니다.");
         }
     }
 
