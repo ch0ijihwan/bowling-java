@@ -12,7 +12,7 @@ class SpareTest {
 
     @Test
     @DisplayName("해당하는 핀 갯수와 스페어 기호를 반환한다.")
-    void getSymbol() {
+    void getScoreSymbol() {
         //given
         BowlingState spare = Spare.create(new PinCount(4), new PinCount(6));
         String expect = "4|/";
@@ -46,5 +46,6 @@ class SpareTest {
 
         //then
         assertThat(actual).isTrue();
+
     }
 }
