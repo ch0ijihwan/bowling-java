@@ -15,11 +15,11 @@ public class Controller {
         this.output = output;
     }
 
-    public void run(){
+    public void run() {
         Player player = new Player(input.inputPlayerName());
         Frames frames = Frames.createFirst();
-        while (frames.hasNextPitching()){
-            int knockedDownPinCountValue= input.inputKnockedDownPinCount(frames.getLastFrameIndex());
+        while (frames.hasNextPitching()) {
+            int knockedDownPinCountValue = input.inputKnockedDownPinCount(frames.getLastFrameIndex());
             PinCount knockedPinCount = new PinCount(knockedDownPinCountValue);
             frames.bowl(knockedPinCount);
             output.printCurrentStatus(frames, player);
