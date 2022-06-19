@@ -7,7 +7,7 @@ public class PinCount {
     private static final int MAXIMUM_PIN_COUNT = 10;
     private static final int MINIMUM_PIN_COUNT = 0;
 
-    public final int value;
+    private final int value;
 
     public PinCount(final int pinCount) {
         validateSize(pinCount);
