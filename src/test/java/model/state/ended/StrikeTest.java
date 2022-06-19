@@ -17,7 +17,7 @@ class StrikeTest {
 
         //given
         BowlingState strike = Strike.create();
-        String expect = " X ";
+        String expect = "X";
 
         //when
         String actual = strike.getScoreSymbol();
