@@ -6,6 +6,8 @@ import model.state.ended.Strike;
 
 public class FirstPitch extends RunningState {
 
+    private static final String BLANK = "";
+
     public static RunningState create(){
         return new FirstPitch();
     }
@@ -22,6 +24,6 @@ public class FirstPitch extends RunningState {
 
     @Override
     public String getScoreSymbol() {
-        throw new IllegalStateException("투구 중에는 점수를 확인 할 수 없습니다.");
+        return BLANK;
     }
 }
