@@ -7,6 +7,7 @@ import model.state.ended.Miss;
 import model.state.ended.Spare;
 import model.state.ended.Strike;
 import model.state.running.FirstPitch;
+import model.state.running.RunningState;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -74,8 +75,14 @@ public class LastFrame implements Frame {
         if (bowlCount == MAXIMUM_BOWL_COUNT) {
             return true;
         }
+
         BowlingState lastState = getLastState();
-        return isDoubleStrike() || lastState instanceof Miss || lastState instanceof Gutter;
+
+        if (isDoubleStrike() || lastState instanceof Miss || lastState instanceof Gutter) {
+            return true;
+        }
+
+        return bowlCount == MINIMUM_BOWL_COUNT && lastState instanceof RunningState;
     }
 
     private boolean isDoubleStrike() {

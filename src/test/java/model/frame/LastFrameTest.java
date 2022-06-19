@@ -38,7 +38,7 @@ class LastFrameTest {
 
         //then
         assertThat(actual.getIndex()).isEqualTo(10);
-        assertThat(actual.isEnd()).isFalse();
+        assertThat(actual.isEnd()).isTrue();
         assertThat(actual.getScoreSymbol()).isEqualTo("X|2");
     }
 
