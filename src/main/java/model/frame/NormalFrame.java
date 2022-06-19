@@ -46,4 +46,12 @@ public class NormalFrame implements Frame {
     public String getScoreSymbol() {
         return this.state.getScoreSymbol();
     }
+
+    @Override
+    public String toString() {
+        return "NormalFrame{" +
+                "index=" + index +
+                ", state=" + state +
+                '}';
+    }
 }
