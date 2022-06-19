@@ -19,10 +19,14 @@ public class Controller {
         Player player = new Player(input.inputPlayerName());
         Frames frames = Frames.createFirst();
         while (frames.hasNextPitching()) {
-            int knockedDownPinCountValue = input.inputKnockedDownPinCount(frames.getLastFrameIndex());
-            PinCount knockedPinCount = new PinCount(knockedDownPinCountValue);
+            PinCount knockedPinCount = inputKnockedPinCount(frames);
             frames.bowl(knockedPinCount);
             output.printCurrentStatus(frames, player);
         }
+    }
+
+    private PinCount inputKnockedPinCount(final Frames frames) {
+        int pinCount = input.inputKnockedDownPinCount(frames.getLastFrameIndex());
+        return new PinCount(pinCount);
     }
 }
