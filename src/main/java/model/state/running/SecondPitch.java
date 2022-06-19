@@ -9,6 +9,7 @@ import model.state.ended.Spare;
 public class SecondPitch extends RunningState {
 
     private static final int MAXIMUM_PIN_COUNT = 10;
+    private static final String ZERO_SYMBOL = "-";
 
     private final PinCount firstPinCount;
 
@@ -47,6 +48,9 @@ public class SecondPitch extends RunningState {
 
     @Override
     public String getScoreSymbol() {
+        if (firstPinCount.getValue() == 0) {
+            return ZERO_SYMBOL;
+        }
         return String.valueOf(firstPinCount.getValue());
     }
 }

@@ -6,7 +6,7 @@ import model.state.BowlingState;
 public class Miss extends EndedState {
 
     private static final String DELIMITER = "|";
-
+    private static final String ZERO_SYMBOL = "-";
     private final PinCount firstPinCount;
     private final PinCount secondPinCount;
 
@@ -21,6 +21,9 @@ public class Miss extends EndedState {
 
     @Override
     public String getScoreSymbol() {
+        if(firstPinCount.getValue() == 0){
+            return ZERO_SYMBOL + DELIMITER + secondPinCount.getValue();
+        }
         return firstPinCount.getValue() + DELIMITER + secondPinCount.getValue();
     }
 }
