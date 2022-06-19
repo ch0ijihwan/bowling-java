@@ -77,7 +77,6 @@ public class LastFrame implements Frame {
         }
 
         BowlingState lastState = getLastState();
-
         if (isDoubleStrike() || lastState instanceof Miss || lastState instanceof Gutter) {
             return true;
         }
