@@ -79,45 +79,10 @@ class PinCountTest {
         );
     }
 
-    @ParameterizedTest
-    @MethodSource("gutterPinCountParameterProvider")
-    @DisplayName("핀의 갯수가 거터 인 경우 true 반환")
-    void isGutter(final PinCount secondPinCount, final boolean expect) {
-        //given
-        PinCount firstPinCount = new PinCount(0);
-
-        //when
-        boolean actual = firstPinCount.isGutter(secondPinCount);
-
-        //then
-        assertThat(actual).isEqualTo(expect);
-    }
-
     private static Stream<Arguments> gutterPinCountParameterProvider() {
         return Stream.of(
                 Arguments.of(new PinCount(0), true),
                 Arguments.of(new PinCount(1), false)
-        );
-    }
-
-    @ParameterizedTest
-    @MethodSource("missPinCountParameterProvider")
-    @DisplayName("핀의 갯수가 미스 인 경우 true 반환")
-    void isMiss(final PinCount secondPinCount, final boolean expect) {
-        //given
-        PinCount firstPinCount = new PinCount(0);
-
-        //when
-        boolean actual = firstPinCount.isMiss(secondPinCount);
-
-        //then
-        assertThat(actual).isEqualTo(expect);
-    }
-
-    private static Stream<Arguments> missPinCountParameterProvider() {
-        return Stream.of(
-                Arguments.of(new PinCount(0), false),
-                Arguments.of(new PinCount(1), true)
         );
     }
 }

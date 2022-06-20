@@ -27,13 +27,7 @@ public class SecondPitch extends RunningState {
         if (firstPinCount.isSpare(secondPinCount)) {
             return Spare.create(firstPinCount, secondPinCount);
         }
-        if (firstPinCount.isMiss(secondPinCount)) {
             return Miss.create(firstPinCount, secondPinCount);
-        }
-        if (firstPinCount.isGutter(secondPinCount)) {
-            return Gutter.create();
-        }
-        throw new IllegalStateException("투구에 해당하는 상태가 없습니다.");
     }
 
     private void validateSecondPitching(final PinCount secondPinCount) {

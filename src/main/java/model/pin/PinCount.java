@@ -11,7 +11,6 @@ public class PinCount {
 
     public PinCount(final int pinCount) {
         validateSize(pinCount);
-
         this.value = pinCount;
     }
 
@@ -26,19 +25,11 @@ public class PinCount {
     }
 
     public boolean isStrike() {
-        return value == MAXIMUM_PIN_COUNT;
+        return this.getValue() == MAXIMUM_PIN_COUNT;
     }
 
     public boolean isSpare(final PinCount secondPinCount) {
         return this.getValue() + secondPinCount.getValue() == MAXIMUM_PIN_COUNT;
-    }
-
-    public boolean isGutter(final PinCount secondPinCount) {
-        return this.getValue() == MINIMUM_PIN_COUNT && secondPinCount.getValue() == MINIMUM_PIN_COUNT;
-    }
-
-    public boolean isMiss(final PinCount secondPinCount) {
-        return !isGutter(secondPinCount) && this.getValue() + secondPinCount.getValue() < MAXIMUM_PIN_COUNT;
     }
 
     @Override

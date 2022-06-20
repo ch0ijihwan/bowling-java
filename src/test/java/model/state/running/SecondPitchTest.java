@@ -42,7 +42,7 @@ class SecondPitchTest {
     }
 
     @Test
-    @DisplayName("두 번째 투구 후, 핀들의 갯수가 10보다 작고 0 보다 크면 미스를 반환한다.")
+    @DisplayName("두 번째 투구 후, 핀들의 갯수가 10보다 작으면 미스를 반환한다.")
     void bowlMiss() {
         //given
         PinCount firstPinCount = new PinCount(0);
@@ -54,20 +54,5 @@ class SecondPitchTest {
 
         //then
         assertThat(actual).isInstanceOf(Miss.class);
-    }
-
-    @Test
-    @DisplayName("두 번째 투구 후, 둘의 합이 0 인경우 거터를 반환한다.")
-    void bowlGutter() {
-        //given
-        PinCount firstPinCount = new PinCount(0);
-        PinCount secondPinCount = new PinCount(0);
-        BowlingState runningState = SecondPitch.create(firstPinCount);
-
-        //when
-        BowlingState actual = runningState.bowl(secondPinCount);
-
-        //then
-        assertThat(actual).isInstanceOf(Gutter.class);
     }
 }
