@@ -17,8 +17,7 @@ class FirstPitchTest {
     @ParameterizedTest
     @MethodSource("firstPinCountParameterProvider")
     @DisplayName("핀을 입력받아, 해당하는 상태를 반환한다.")
-    void bowl(final PinCount firstPinCount, final Class<?> expect) {
-
+    void bowl(final PinCount firstPinCount, final Class<BowlingState> expect) {
         //given
         RunningState runningState = FirstPitch.create();
 
