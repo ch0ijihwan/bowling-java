@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class ConsoleInput implements Input {
 
     private static final String INPUT_PLAYER_NAME_MESSAGE = "플레이어의 이름은(3 english letters)? : ";
-    public static final String INPUT_KNOCKED_DOWN_PIN_COUNT_MESSAGE = "%d 트레임 투구 :";
+    public static final String INPUT_KNOCKED_DOWN_PIN_COUNT_MESSAGE = "%d 프레임 투구 :";
 
     private static final Scanner SCANNER = new Scanner(System.in);
 
