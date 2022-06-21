@@ -3,6 +3,7 @@ package model.state.ended;
 import model.pin.PinCount;
 import model.state.BowlingState;
 import model.state.running.SecondPitch;
+import model.state.status.Status;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -14,6 +15,11 @@ class EndedStateTest {
         @Override
         public String getScoreSymbol() {
             return "testEndedState";
+        }
+
+        @Override
+        public boolean isSameStatus(Status status) {
+            return false;
         }
     };
 

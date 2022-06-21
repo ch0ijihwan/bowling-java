@@ -1,6 +1,7 @@
 package model.state.ended;
 
 import model.state.BowlingState;
+import model.state.status.Status;
 
 public class Strike extends EndedState {
 
@@ -13,6 +14,11 @@ public class Strike extends EndedState {
     @Override
     public String getScoreSymbol() {
         return STRIKE_SYMBOL;
+    }
+
+    @Override
+    public boolean isSameStatus(final Status status) {
+        return status == Status.STRIKE;
     }
 
     @Override

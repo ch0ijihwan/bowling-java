@@ -1,6 +1,7 @@
 package model.state;
 
 import model.pin.PinCount;
+import model.state.status.Status;
 
 public interface BowlingState {
 
@@ -9,4 +10,6 @@ public interface BowlingState {
     boolean isEnd();
 
     String getScoreSymbol();
+
+    boolean isSameStatus(Status status);
 }

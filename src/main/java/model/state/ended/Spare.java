@@ -2,6 +2,7 @@ package model.state.ended;
 
 import model.pin.PinCount;
 import model.state.BowlingState;
+import model.state.status.Status;
 
 import java.util.Objects;
 
@@ -17,7 +18,7 @@ public class Spare extends EndedState {
         return new Spare(firstPinCount, secondPinCount);
     }
 
-    private Spare(PinCount firstPinCount, PinCount secondPinCount) {
+    private Spare(final PinCount firstPinCount,final  PinCount secondPinCount) {
         this.firstPinCount = firstPinCount;
         this.secondPinCount = secondPinCount;
     }
@@ -27,6 +28,10 @@ public class Spare extends EndedState {
         return firstPinCount.getValue() + DELIMITER + SPARE_SYMBOL;
     }
 
+    @Override
+    public boolean isSameStatus(final Status status) {
+        return status == Status.SPARE;
+    }
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

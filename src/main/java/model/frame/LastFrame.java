@@ -2,12 +2,9 @@ package model.frame;
 
 import model.pin.PinCount;
 import model.state.BowlingState;
-import model.state.ended.Gutter;
-import model.state.ended.Miss;
-import model.state.ended.Spare;
 import model.state.ended.Strike;
 import model.state.running.FirstPitch;
-import model.state.running.RunningState;
+import model.state.status.Status;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -62,8 +59,8 @@ public class LastFrame implements Frame {
         return states.get(getStatesLastIndex());
     }
 
-    private boolean isStrikeOrSpare(final BowlingState current) {
-        return current instanceof Strike || current instanceof Spare;
+    private boolean isStrikeOrSpare(final BowlingState currentBowlingState) {
+        return currentBowlingState.isSameStatus(Status.STRIKE) || currentBowlingState.isSameStatus(Status.SPARE);
     }
 
     @Override
@@ -78,11 +75,11 @@ public class LastFrame implements Frame {
         }
 
         BowlingState lastState = getLastState();
-        if (isDoubleStrike() || lastState instanceof Miss || lastState instanceof Gutter) {
+        if (isDoubleStrike() || lastState.isSameStatus(Status.MISS)) {
             return true;
         }
 
-        return bowlCount == MINIMUM_BOWL_COUNT && lastState instanceof RunningState;
+        return bowlCount == MINIMUM_BOWL_COUNT && !lastState.isEnd();
     }
 
     private boolean isDoubleStrike() {

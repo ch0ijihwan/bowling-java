@@ -2,7 +2,6 @@ package model.state.running;
 
 import model.pin.PinCount;
 import model.state.BowlingState;
-import model.state.ended.Gutter;
 import model.state.ended.Miss;
 import model.state.ended.Spare;
 import org.junit.jupiter.api.DisplayName;

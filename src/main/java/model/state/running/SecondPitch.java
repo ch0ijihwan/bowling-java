@@ -2,7 +2,6 @@ package model.state.running;
 
 import model.pin.PinCount;
 import model.state.BowlingState;
-import model.state.ended.Gutter;
 import model.state.ended.Miss;
 import model.state.ended.Spare;
 
@@ -27,7 +26,7 @@ public class SecondPitch extends RunningState {
         if (firstPinCount.isSpare(secondPinCount)) {
             return Spare.create(firstPinCount, secondPinCount);
         }
-            return Miss.create(firstPinCount, secondPinCount);
+        return Miss.create(firstPinCount, secondPinCount);
     }
 
     private void validateSecondPitching(final PinCount secondPinCount) {
