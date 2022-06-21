@@ -2,7 +2,6 @@ package model.frame;
 
 import model.pin.PinCount;
 import model.state.BowlingState;
-import model.state.ended.Strike;
 import model.state.running.FirstPitch;
 import model.state.status.Status;
 
@@ -84,7 +83,7 @@ public class LastFrame implements Frame {
 
     private boolean isDoubleStrike() {
         return states.stream()
-                .filter(Strike.class::isInstance)
+                .filter(bowlingState -> bowlingState.getStatus() == Status.STRIKE)
                 .count() == TWO_STRIKE;
     }
 
