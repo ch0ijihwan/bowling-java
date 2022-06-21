@@ -11,5 +11,5 @@ public interface BowlingState {
 
     String getScoreSymbol();
 
-    boolean isSameStatus(Status status);
+    Status getStatus();
 }

@@ -60,7 +60,7 @@ public class LastFrame implements Frame {
     }
 
     private boolean isStrikeOrSpare(final BowlingState currentBowlingState) {
-        return currentBowlingState.isSameStatus(Status.STRIKE) || currentBowlingState.isSameStatus(Status.SPARE);
+        return currentBowlingState.getStatus() == Status.STRIKE || currentBowlingState.getStatus() == Status.SPARE;
     }
 
     @Override
@@ -75,7 +75,7 @@ public class LastFrame implements Frame {
         }
 
         BowlingState lastState = getLastState();
-        if (isDoubleStrike() || lastState.isSameStatus(Status.MISS)) {
+        if (isDoubleStrike() || lastState.getStatus() == Status.MISS) {
             return true;
         }
 

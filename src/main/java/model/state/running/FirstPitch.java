@@ -8,15 +8,16 @@ public class FirstPitch extends RunningState {
 
     private static final String BLANK = "";
 
-    public static RunningState create(){
+    public static RunningState create() {
         return new FirstPitch();
     }
 
-    private FirstPitch(){}
+    private FirstPitch() {
+    }
 
     @Override
     public BowlingState bowl(final PinCount pinCount) {
-        if(pinCount.isStrike()){
+        if (pinCount.isStrike()) {
             return Strike.create();
         }
         return SecondPitch.create(pinCount);

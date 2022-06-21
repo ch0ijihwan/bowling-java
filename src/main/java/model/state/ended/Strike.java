@@ -17,8 +17,8 @@ public class Strike extends EndedState {
     }
 
     @Override
-    public boolean isSameStatus(final Status status) {
-        return status == Status.STRIKE;
+    public Status getStatus() {
+        return Status.STRIKE;
     }
 
     @Override

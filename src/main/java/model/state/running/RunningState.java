@@ -10,7 +10,7 @@ public abstract class RunningState implements BowlingState {
     }
 
     @Override
-    public boolean isSameStatus(final Status status){
-        return status == Status.RUNNING;
+    public Status getStatus() {
+        return Status.RUNNING;
     }
 }

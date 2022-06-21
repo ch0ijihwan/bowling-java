@@ -30,7 +30,7 @@ public class Miss extends EndedState {
     }
 
     @Override
-    public boolean isSameStatus(final Status status) {
-        return status == Status.MISS;
+    public Status getStatus() {
+        return Status.MISS;
     }
 }

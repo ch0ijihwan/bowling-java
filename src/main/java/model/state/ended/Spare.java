@@ -29,8 +29,8 @@ public class Spare extends EndedState {
     }
 
     @Override
-    public boolean isSameStatus(final Status status) {
-        return status == Status.SPARE;
+    public Status getStatus() {
+        return Status.SPARE;
     }
     @Override
     public boolean equals(Object o) {

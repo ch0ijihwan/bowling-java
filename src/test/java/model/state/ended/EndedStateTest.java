@@ -18,8 +18,8 @@ class EndedStateTest {
         }
 
         @Override
-        public boolean isSameStatus(Status status) {
-            return false;
+        public Status getStatus() {
+            return Status.MISS;
         }
     };
 
