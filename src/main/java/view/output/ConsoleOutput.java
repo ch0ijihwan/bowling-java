@@ -10,7 +10,7 @@ public class ConsoleOutput implements Output {
     private static final String BOWLING_SCORE_HEAD_FORMAT = "| NAME |  01  |  02  |  03  |  04  |  05  |  06  |  07  |  08  |  09  |  10  |";
     private static final String PLAYER_NAME_FORMAT = "|  %s |";
     private static final String EMPTY_FRAME_FORMAT = "      |";
-    private static final String ONE_SPACE_FORMAT = " %-5.4s|";
+    private static final String ONE_SPACE_FORMAT = "%6s|";
     private static final int ALL_FRAME_COUNT = 10;
 
     @Override
@@ -24,7 +24,7 @@ public class ConsoleOutput implements Output {
         return frames.getFrames()
                 .stream()
                 .map(frame -> addBlank(frame.getScoreSymbol()))
-                .collect(Collectors.joining());
+                .collect(Collectors.joining(""));
     }
 
     private String addBlank(final String symbol) {
