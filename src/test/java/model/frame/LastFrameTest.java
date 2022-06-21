@@ -29,17 +29,18 @@ class LastFrameTest {
     }
 
     @Test
-    @DisplayName("스트라이크 투구 시 한번 더 투구할 수 있다. 총 2번")
+    @DisplayName("스트라이크 투구 시 한번 더 투구할 수 있다. 총 3번")
     void bowlStrike2() {
         //when
         Frame lastFrame = LastFrame.create()
+                .bowl(new PinCount(10))
                 .bowl(new PinCount(10));
-        Frame actual = lastFrame.bowl(new PinCount(2));
+        Frame actual = lastFrame.bowl(new PinCount(10));
 
         //then
         assertThat(actual.getIndex()).isEqualTo(10);
         assertThat(actual.isEnd()).isTrue();
-        assertThat(actual.getScoreSymbol()).isEqualTo("X|2");
+        assertThat(actual.getScoreSymbol()).isEqualTo("X|X|X");
     }
 
     @Test
