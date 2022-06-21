@@ -14,7 +14,6 @@ public class LastFrame implements Frame {
     private static final int MAXIMUM_BOWL_COUNT = 3;
     private static final int MINIMUM_BOWL_COUNT = 2;
     private static final int LAST_FRAME_INDEX = 10;
-    private static final int TWO_STRIKE = 2;
 
     private final List<BowlingState> states = new ArrayList<>();
     private int bowlCount;
@@ -74,17 +73,7 @@ public class LastFrame implements Frame {
         }
 
         BowlingState lastState = getLastState();
-        if (isDoubleStrike() || lastState.getStatus() == Status.MISS) {
-            return true;
-        }
-
-        return bowlCount == MINIMUM_BOWL_COUNT && !lastState.isEnd();
-    }
-
-    private boolean isDoubleStrike() {
-        return states.stream()
-                .filter(bowlingState -> bowlingState.getStatus() == Status.STRIKE)
-                .count() == TWO_STRIKE;
+        return bowlCount == MINIMUM_BOWL_COUNT && lastState.getStatus() == Status.MISS;
     }
 
     @Override
