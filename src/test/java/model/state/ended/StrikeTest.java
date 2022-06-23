@@ -2,7 +2,6 @@ package model.state.ended;
 
 import model.pin.PinCount;
 import model.state.BowlingState;
-import model.state.ended.Strike;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

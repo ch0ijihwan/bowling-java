@@ -84,17 +84,9 @@ class FramesTest {
     void hasNextPitching() {
         //given
         Frames frames = Frames.createFirst();
-        frames.bowl(new PinCount(10));
-        frames.bowl(new PinCount(10));
-        frames.bowl(new PinCount(10));
-        frames.bowl(new PinCount(10));
-        frames.bowl(new PinCount(10));
-        frames.bowl(new PinCount(10));
-        frames.bowl(new PinCount(10));
-        frames.bowl(new PinCount(10));
-        frames.bowl(new PinCount(10));
-        frames.bowl(new PinCount(10));
-        frames.bowl(new PinCount(1));
+        for (int i = 0; i < 12; i++) {
+            frames.bowl(new PinCount(10));
+        }
 
         //when
         boolean actual = frames.hasNextPitching();

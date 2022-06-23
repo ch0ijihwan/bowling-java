@@ -18,11 +18,11 @@ class BowlingGameTest {
     @DisplayName("다음 투구를 할 수 있을 경우 true 를 반환한다.")
     void hasNextPitching() {
         //given
+        Frames elevenStrikeFrames = generateStrikeFrames(11);
         Frames twelveStrikeFrames = generateStrikeFrames(12);
-        Frames thirteenStrikeFrames = generateStrikeFrames(13);
 
-        BowlingGame bowlingGame1 = new BowlingGame(player, twelveStrikeFrames);
-        BowlingGame bowlingGame2 = new BowlingGame(new Player("QWE"), thirteenStrikeFrames);
+        BowlingGame bowlingGame1 = new BowlingGame(player, elevenStrikeFrames);
+        BowlingGame bowlingGame2 = new BowlingGame(new Player("QWE"), twelveStrikeFrames);
 
         //when
         boolean twelveStrikeActual = bowlingGame1.hasNextPitching();

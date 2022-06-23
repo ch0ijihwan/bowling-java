@@ -15,17 +15,18 @@ import static org.assertj.core.api.Assertions.assertThatIllegalStateException;
 class LastFrameTest {
 
     @Test
-    @DisplayName("스트라이크 투구 시 한번 더 투구할 수 있다. 총 2번")
+    @DisplayName("스트라이크 투구 시 한번 더 투구할 수 있다. 총 3번")
     void bowlStrike() {
         //when
         Frame lastFrame = LastFrame.create()
+                .bowl(new PinCount(10))
                 .bowl(new PinCount(10));
         Frame actual = lastFrame.bowl(new PinCount(10));
 
         //then
         assertThat(actual.getIndex()).isEqualTo(10);
         assertThat(actual.isEnd()).isTrue();
-        assertThat(actual.getScoreSymbol()).isEqualTo("X|X");
+        assertThat(actual.getScoreSymbol()).isEqualTo("X|X|X");
     }
 
     @Test
@@ -112,7 +113,7 @@ class LastFrameTest {
 
     private static Stream<Arguments> allBowlingEndedCasesParameterCreateProvider() {
         return Stream.of(
-                Arguments.of(LastFrame.create().bowl(new PinCount(10)).bowl(new PinCount(10))),
+                Arguments.of(LastFrame.create().bowl(new PinCount(10)).bowl(new PinCount(10)).bowl(new PinCount(10))),
                 Arguments.of(LastFrame.create().bowl(new PinCount(5)).bowl(new PinCount(5)).bowl(new PinCount(1))),
                 Arguments.of(LastFrame.create().bowl(new PinCount(5)).bowl(new PinCount(5)).bowl(new PinCount(10))),
                 Arguments.of(LastFrame.create().bowl(new PinCount(1)).bowl(new PinCount(2))),
