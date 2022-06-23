@@ -1,5 +1,6 @@
 package controller;
 
+import model.BowlingGame;
 import model.Player;
 import model.frame.Frames;
 import model.pin.PinCount;
@@ -18,9 +19,10 @@ public class Controller {
     public void run() {
         Player player = new Player(input.inputPlayerName());
         Frames frames = Frames.createFirst();
-        while (frames.hasNextPitching()) {
+        BowlingGame bowlingGame = new BowlingGame(player, frames);
+        while (bowlingGame.hasNextPitching()) {
             PinCount knockedPinCount = inputKnockedPinCount(frames);
-            frames.bowl(knockedPinCount);
+            bowlingGame.bowl(knockedPinCount);
             output.printCurrentStatus(frames, player);
         }
     }
