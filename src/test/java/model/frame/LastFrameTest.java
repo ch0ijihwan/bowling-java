@@ -1,5 +1,6 @@
 package model.frame;
 
+import model.frame.score.Score;
 import model.pin.PinCount;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -133,4 +134,18 @@ class LastFrameTest {
         //then
         assertThat(actual).isEqualTo(expect);
     }
+
+    @Test
+    @DisplayName("점수를 받아서, 합친 후 반환한다. ")
+    void addScore() {
+        //given
+        Frame lastFrame = LastFrame.create().bowl(new PinCount(10)).bowl(new PinCount(10)).bowl(new PinCount(10));
+
+        //when
+        Score actual = lastFrame.addScore(Score.createStrikeScore());
+
+        //then
+        assertThat(actual.getScoreValue()).isEqualTo(30);
+    }
 }
+
