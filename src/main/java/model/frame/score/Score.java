@@ -47,4 +47,12 @@ public class Score {
     public boolean hasRemainingBonusCount() {
         return remainingBonusCount > 0;
     }
+
+    @Override
+    public String toString() {
+        return "Score{" +
+                "score=" + score +
+                ", remainingBonusCount=" + remainingBonusCount +
+                '}';
+    }
 }
