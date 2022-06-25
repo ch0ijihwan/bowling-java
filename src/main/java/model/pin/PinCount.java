@@ -1,6 +1,6 @@
 package model.pin;
 
-import model.frame.Score;
+import model.frame.score.Score;
 
 import java.util.Objects;
 
