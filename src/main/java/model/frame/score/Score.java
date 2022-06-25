@@ -1,8 +1,9 @@
-package model.frame;
+package model.frame.score;
 
 public class Score {
 
     private static final int MAXIMUM_ONT_PITCHING_SCORE = 10;
+    private static final int CAN_NOT_CALCULATE_STATE = -1;
 
     private final int score;
     private final int remainingBonusCount;
@@ -10,6 +11,10 @@ public class Score {
     private Score(final int score, final int remainingBonusCount) {
         this.score = score;
         this.remainingBonusCount = remainingBonusCount;
+    }
+
+    public static Score createCanNotCalculateScore() {
+        return new Score(CAN_NOT_CALCULATE_STATE, 0);
     }
 
     public static Score createStrikeScore() {
@@ -32,9 +37,9 @@ public class Score {
         return new Score(this.score + knockedPinCount, remainingBonusCount - 1);
     }
 
-    public int getScore() {
+    public int getScoreValue() {
         if (hasRemainingBonusCount()) {
-            throw new IllegalStateException("추가 득점 기회가 남아 있어, 점수를 확인 할 수 없습니다.");
+            throw new NotCountScore("추가 득점 기회가 남아 있어, 점수를 확인 할 수 없습니다.");
         }
         return this.score;
     }
