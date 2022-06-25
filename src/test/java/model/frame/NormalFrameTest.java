@@ -82,4 +82,17 @@ class NormalFrameTest {
         //then
         assertThat(actual).isEqualTo(3);
     }
+
+    @Test
+    @DisplayName("점수를 반환받는다.'")
+    void getScore() {
+        //given
+        Frame firstFrame = NormalFrame.createFirst();
+        //given
+        Frame nextFrame = firstFrame.bowl(new PinCount(1));
+        int score = nextFrame.getScore();
+
+        //then
+        System.out.println(score);
+    }
 }

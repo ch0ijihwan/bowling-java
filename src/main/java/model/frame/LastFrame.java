@@ -1,5 +1,7 @@
 package model.frame;
 
+import model.frame.score.NotCountScore;
+import model.frame.score.Score;
 import model.pin.PinCount;
 import model.state.BowlingState;
 import model.state.running.FirstPitch;
@@ -81,6 +83,29 @@ public class LastFrame implements Frame {
         return states.stream()
                 .map(BowlingState::getScoreSymbol)
                 .collect(Collectors.joining("|"));
+    }
+
+    @Override
+    public int getScore() {
+        try {
+            return calculateScore().getScoreValue();
+        } catch (NotCountScore e) {
+            return Score.createCanNotCalculateScore().getScoreValue();
+        }
+    }
+
+    private Score calculateScore() throws NotCountScore {
+        Score score = states.get(0).createScore();
+        for (int i = 1; i < states.size(); i++) {
+            score = states.get(i).calculateScore(score);
+        }
+        return score;
+    }
+
+
+    @Override
+    public Score addScore(final Score score) {
+        throw new IllegalStateException("마지막 프레임에서는 보너스 기회에 대한 추가 스코어가 없습니다.");
     }
 
     @Override

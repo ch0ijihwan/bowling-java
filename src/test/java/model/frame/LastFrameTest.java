@@ -120,4 +120,17 @@ class LastFrameTest {
                 Arguments.of(LastFrame.create().bowl(new PinCount(0)).bowl(new PinCount(0)))
         );
     }
+
+    @Test
+    @DisplayName("점수를 반환받는다.")
+    void calculateScore() {
+        Frame lastFrame = LastFrame.create().bowl(new PinCount(10)).bowl(new PinCount(10)).bowl(new PinCount(10));
+        int expect = 30;
+
+        //when
+        int actual = lastFrame.getScore();
+
+        //then
+        assertThat(actual).isEqualTo(expect);
+    }
 }

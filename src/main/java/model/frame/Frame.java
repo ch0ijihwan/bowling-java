@@ -1,5 +1,6 @@
 package model.frame;
 
+import model.frame.score.Score;
 import model.pin.PinCount;
 
 public interface Frame {
@@ -11,4 +12,8 @@ public interface Frame {
     boolean isEnd();
 
     String getScoreSymbol();
+
+    int getScore();
+
+    Score addScore(Score score);
 }
