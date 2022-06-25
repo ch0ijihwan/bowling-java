@@ -1,13 +1,13 @@
 package model.state.ended;
 
+import model.frame.score.NotCountScore;
 import model.frame.score.Score;
 import model.pin.PinCount;
 import model.state.BowlingState;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatIllegalStateException;
+import static org.assertj.core.api.Assertions.*;
 
 class StrikeTest {
 
@@ -51,17 +51,15 @@ class StrikeTest {
     }
 
     @Test
-    @DisplayName("보너스 점수 횟수가 횟수가 2번인 경우(스트라이크) 첫번째와 두번째 점수를 더한 스코어를 반환한다.")
+    @DisplayName("보너스 점수 횟수가 횟수가 2번인 경우(스트라이크), 점수를 확인 할 수 없다. - 예외처리")
     void addScoreWhenStrike() {
         //given
         BowlingState strike = Strike.create();
         int expect = 20;
-
+        Score score = strike.calculateScore(Score.createStrikeScore());
         //when
-        Score actual = strike.calculateScore(Score.createStrikeScore());
-
-        //then
-        assertThat(actual.getScoreValue()).isEqualTo(expect);
+        assertThatThrownBy(score::getScoreValue).isInstanceOf(NotCountScore.class)
+                .hasMessage("추가 득점 기회가 남아 있어, 점수를 확인 할 수 없습니다.");
     }
 
     @Test

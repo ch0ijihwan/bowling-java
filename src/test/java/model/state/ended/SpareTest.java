@@ -71,7 +71,7 @@ class SpareTest {
         BowlingState spare = Spare.create(new PinCount(4), new PinCount(6));
 
         //when
-        Score actual = spare.calculateScore(Score.createSpareScore());
+        Score actual = spare.calculateScore(Score.createStrikeScore());
 
         //then
         assertThat(actual.getScoreValue()).isEqualTo(expect);
