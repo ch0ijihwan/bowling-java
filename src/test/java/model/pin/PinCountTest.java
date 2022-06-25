@@ -1,5 +1,6 @@
 package model.pin;
 
+import model.frame.Score;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -79,10 +80,16 @@ class PinCountTest {
         );
     }
 
-    private static Stream<Arguments> gutterPinCountParameterProvider() {
-        return Stream.of(
-                Arguments.of(new PinCount(0), true),
-                Arguments.of(new PinCount(1), false)
-        );
+    @Test
+    @DisplayName("스코어를 받아, 현재 핀 갯수를 더한 스코어를 만들어 반환한다.")
+    void sunScore() {
+        //given
+        PinCount pinCount = new PinCount(2);
+
+        //when
+        Score actual = pinCount.sumScore(Score.createMissScore(3));
+
+        //then
+        assertThat(actual).hasFieldOrPropertyWithValue("score", 5);
     }
 }

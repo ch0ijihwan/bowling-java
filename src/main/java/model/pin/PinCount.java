@@ -1,5 +1,7 @@
 package model.pin;
 
+import model.frame.Score;
+
 import java.util.Objects;
 
 public class PinCount {
@@ -30,6 +32,10 @@ public class PinCount {
 
     public boolean isSpare(final PinCount secondPinCount) {
         return this.getValue() + secondPinCount.getValue() == MAXIMUM_PIN_COUNT;
+    }
+
+    public Score sumScore(final Score firstScore) {
+        return firstScore.bowl(this.value);
     }
 
     @Override
