@@ -1,6 +1,6 @@
 package model.state.ended;
 
-import model.frame.Score;
+import model.frame.score.Score;
 import model.pin.PinCount;
 import model.state.BowlingState;
 import org.junit.jupiter.api.BeforeEach;
@@ -65,7 +65,7 @@ class MissTest {
         Score actual = miss.addScore(Score.createStrikeScore());
 
         //then
-        assertThat(actual.getScore()).isEqualTo(expect);
+        assertThat(actual.getScoreValue()).isEqualTo(expect);
     }
 
     @Test
@@ -78,6 +78,6 @@ class MissTest {
         Score actual = miss.addScore(Score.createSpareScore());
 
         //then
-        assertThat(actual.getScore()).isEqualTo(expect);
+        assertThat(actual.getScoreValue()).isEqualTo(expect);
     }
 }

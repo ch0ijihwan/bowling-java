@@ -1,6 +1,7 @@
 package model.state.running;
 
-import model.frame.Score;
+import model.frame.score.NotCountScore;
+import model.frame.score.Score;
 import model.pin.PinCount;
 import model.state.BowlingState;
 import model.state.ended.Strike;
@@ -31,6 +32,6 @@ public class FirstPitch extends RunningState {
 
     @Override
     public Score addScore(final Score currentScore) {
-        throw new IllegalStateException("투구 중인 상태에서는 점수를 확인 할 수 없습니다.");
+        throw new NotCountScore("투구 중인 상태에서는 점수를 확인 할 수 없습니다.");
     }
 }

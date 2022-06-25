@@ -1,6 +1,6 @@
 package model.pin;
 
-import model.frame.Score;
+import model.frame.score.Score;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
