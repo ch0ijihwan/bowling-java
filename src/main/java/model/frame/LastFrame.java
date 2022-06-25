@@ -104,8 +104,11 @@ public class LastFrame implements Frame {
 
 
     @Override
-    public Score addScore(final Score score) {
-        throw new IllegalStateException("마지막 프레임에서는 보너스 기회에 대한 추가 스코어가 없습니다.");
+    public Score addScore(final Score currentScore) {
+        if(getLastState().isEnd()){
+            return calculateScore();
+        }
+        throw new NotCountScore("마지막 라운드의 추가 투구 기회가 남아있습니다.");
     }
 
     @Override
