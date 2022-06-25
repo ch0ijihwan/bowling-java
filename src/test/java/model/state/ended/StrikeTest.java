@@ -1,5 +1,6 @@
 package model.state.ended;
 
+import model.frame.score.Score;
 import model.pin.PinCount;
 import model.state.BowlingState;
 import org.junit.jupiter.api.DisplayName;
@@ -47,5 +48,33 @@ class StrikeTest {
         boolean actual = strike.isEnd();
         //then
         assertThat(actual).isTrue();
+    }
+
+    @Test
+    @DisplayName("보너스 점수 횟수가 횟수가 2번인 경우(스트라이크) 첫번째와 두번째 점수를 더한 스코어를 반환한다.")
+    void addScoreWhenStrike() {
+        //given
+        BowlingState strike = Strike.create();
+        int expect = 20;
+
+        //when
+        Score actual = strike.calculateScore(Score.createStrikeScore());
+
+        //then
+        assertThat(actual.getScoreValue()).isEqualTo(expect);
+    }
+
+    @Test
+    @DisplayName("보너스 점수 횟수가 횟수가 1번인 경우(스페어) 첫번째 점수를 더한 스코어를 반환한다.")
+    void addScoreWhenSpare() {
+        //given
+        BowlingState strike = Strike.create();
+        int expect = 20;
+
+        //when
+        Score actual = strike.calculateScore(Score.createSpareScore());
+
+        //then
+        assertThat(actual.getScoreValue()).isEqualTo(expect);
     }
 }

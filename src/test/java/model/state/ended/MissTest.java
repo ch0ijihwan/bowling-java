@@ -49,7 +49,7 @@ class MissTest {
     @DisplayName("Miss 는 모든 투구가 끝난 상태이다.")
     void isEnd() {
         //when
-        boolean actual= miss.isEnd();
+        boolean actual = miss.isEnd();
 
         //then
         assertThat(actual).isTrue();
@@ -62,7 +62,7 @@ class MissTest {
         int expect = 18;
 
         //when
-        Score actual = miss.addScore(Score.createStrikeScore());
+        Score actual = miss.calculateScore(Score.createStrikeScore());
 
         //then
         assertThat(actual.getScoreValue()).isEqualTo(expect);
@@ -75,7 +75,7 @@ class MissTest {
         int expect = 13;
 
         //when
-        Score actual = miss.addScore(Score.createSpareScore());
+        Score actual = miss.calculateScore(Score.createSpareScore());
 
         //then
         assertThat(actual.getScoreValue()).isEqualTo(expect);
