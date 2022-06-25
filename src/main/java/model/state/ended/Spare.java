@@ -35,12 +35,12 @@ public class Spare extends EndedState {
     }
 
     @Override
-    public Score getScore() {
+    public Score createScore() {
         return Score.createSpareScore();
     }
 
     @Override
-    public Score addScore(final Score currentScore) {
+    public Score calculateScore(final Score currentScore) {
         Score addFirstPinCountScore = firstPinCount.sumScore(currentScore);
         if(!addFirstPinCountScore.hasRemainingBonusCount()){
             return addFirstPinCountScore;

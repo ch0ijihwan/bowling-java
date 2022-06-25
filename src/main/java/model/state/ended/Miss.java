@@ -36,7 +36,7 @@ public class Miss extends EndedState {
     }
 
     @Override
-    public Score getScore() {
+    public Score createScore() {
         return Score.createMissScore(getSumPinCount());
     }
 
@@ -45,7 +45,7 @@ public class Miss extends EndedState {
     }
 
     @Override
-    public Score addScore(final Score currentScore) {
+    public Score calculateScore(final Score currentScore) {
         Score addFirstPinCountScore = firstPinCount.sumScore(currentScore);
         if (!addFirstPinCountScore.hasRemainingBonusCount()) {
             return addFirstPinCountScore;

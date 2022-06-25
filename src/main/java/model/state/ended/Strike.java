@@ -23,12 +23,12 @@ public class Strike extends EndedState {
     }
 
     @Override
-    public Score getScore() {
+    public Score createScore() {
         return Score.createStrikeScore();
     }
 
     @Override
-    public Score addScore(final Score currentScore) {
+    public Score calculateScore(final Score currentScore) {
        if (!currentScore.hasRemainingBonusCount()){
            return currentScore;
        }
