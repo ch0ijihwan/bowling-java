@@ -29,7 +29,6 @@ public class Score {
         if (score >= MAXIMUM_ONT_PITCHING_SCORE) {
             throw new IllegalArgumentException("미스 상태의 점수는 10 이상 일 수 없습니다.");
         }
-
         return new Score(score, 0);
     }
 
