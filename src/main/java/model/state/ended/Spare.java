@@ -1,5 +1,6 @@
 package model.state.ended;
 
+import model.frame.Score;
 import model.pin.PinCount;
 import model.state.BowlingState;
 import model.state.status.Status;
@@ -32,6 +33,21 @@ public class Spare extends EndedState {
     public Status getStatus() {
         return Status.SPARE;
     }
+
+    @Override
+    public Score getScore() {
+        return Score.createSpareScore();
+    }
+
+    @Override
+    public Score addScore(final Score currentScore) {
+        Score addFirstPinCountScore = firstPinCount.sumScore(currentScore);
+        if(!addFirstPinCountScore.hasRemainingBonusCount()){
+            return addFirstPinCountScore;
+        }
+        return secondPinCount.sumScore(addFirstPinCountScore);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

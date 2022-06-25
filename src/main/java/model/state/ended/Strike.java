@@ -1,5 +1,6 @@
 package model.state.ended;
 
+import model.frame.Score;
 import model.state.BowlingState;
 import model.state.status.Status;
 
@@ -19,6 +20,19 @@ public class Strike extends EndedState {
     @Override
     public Status getStatus() {
         return Status.STRIKE;
+    }
+
+    @Override
+    public Score getScore() {
+        return Score.createStrikeScore();
+    }
+
+    @Override
+    public Score addScore(final Score currentScore) {
+       if (!currentScore.hasRemainingBonusCount()){
+           return currentScore;
+       }
+        return currentScore.bowl(10);
     }
 
     @Override

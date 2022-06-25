@@ -17,7 +17,7 @@ class RunningStateTest {
     void setUp() {
         runningState = new RunningState() {
             @Override
-            public BowlingState bowl(PinCount knockedDownPinCount) {
+            public BowlingState bowl(final PinCount knockedDownPinCount) {
                 throw new IllegalStateException("테스트 코드 중 해당 메서드를 사용하지 않습니다.");
             }
 
@@ -27,7 +27,7 @@ class RunningStateTest {
             }
 
             @Override
-            public Score addScore() {
+            public Score addScore(final Score currentScore) {
                 throw  new IllegalStateException("테스트 코드 중 해당 메서드를 사용하지 않습니다.");
             }
         };

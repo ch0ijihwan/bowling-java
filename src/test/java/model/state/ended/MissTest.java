@@ -1,5 +1,6 @@
 package model.state.ended;
 
+import model.frame.Score;
 import model.pin.PinCount;
 import model.state.BowlingState;
 import org.junit.jupiter.api.BeforeEach;
@@ -52,5 +53,31 @@ class MissTest {
 
         //then
         assertThat(actual).isTrue();
+    }
+
+    @Test
+    @DisplayName("보너스 점수 횟수가 2번인 경우 첫번째 핀 점수를 더하고, 두번째 핀 점수를 더한 스코어를 반환한다.")
+    void addScoreWhenStrike() {
+        //given
+        int expect = 18;
+
+        //when
+        Score actual = miss.addScore(Score.createStrikeScore());
+
+        //then
+        assertThat(actual.getScore()).isEqualTo(expect);
+    }
+
+    @Test
+    @DisplayName("보너스 점수 횟수가 횟수가 1번인 경우 첫번째 핀 점수만 더한 스코어를 반환한다.")
+    void addScoreWhenSpare() {
+        //given
+        int expect = 13;
+
+        //when
+        Score actual = miss.addScore(Score.createSpareScore());
+
+        //then
+        assertThat(actual.getScore()).isEqualTo(expect);
     }
 }

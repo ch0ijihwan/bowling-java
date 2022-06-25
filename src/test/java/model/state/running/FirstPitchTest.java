@@ -4,6 +4,7 @@ import model.pin.PinCount;
 import model.state.BowlingState;
 import model.state.ended.Strike;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -11,6 +12,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatIllegalStateException;
 
 class FirstPitchTest {
 
@@ -34,5 +36,16 @@ class FirstPitchTest {
                 Arguments.of(new PinCount(0), SecondPitch.class),
                 Arguments.of(new PinCount(1), SecondPitch.class)
         );
+    }
+
+    @Test
+    @DisplayName("첫번 째 투구 상태에서는 점수를 확인 할 수 없다.")
+    void getScore() {
+        //given
+        RunningState runningState = FirstPitch.create();
+
+        //when
+        assertThatIllegalStateException().isThrownBy(runningState::getScore)
+                .withMessage("투구 실행 중에는 점수를 확인 할 수 없습니다.");
     }
 }

@@ -1,5 +1,6 @@
 package model.state.ended;
 
+import model.frame.Score;
 import model.pin.PinCount;
 import model.state.BowlingState;
 import model.state.status.Status;
@@ -32,5 +33,23 @@ public class Miss extends EndedState {
     @Override
     public Status getStatus() {
         return Status.MISS;
+    }
+
+    @Override
+    public Score getScore() {
+        return Score.createMissScore(getSumPinCount());
+    }
+
+    private int getSumPinCount() {
+        return firstPinCount.getValue() + secondPinCount.getValue();
+    }
+
+    @Override
+    public Score addScore(final Score currentScore) {
+        Score addFirstPinCountScore = firstPinCount.sumScore(currentScore);
+        if(!addFirstPinCountScore.hasRemainingBonusCount()){
+            return addFirstPinCountScore;
+        }
+        return secondPinCount.sumScore(addFirstPinCountScore);
     }
 }

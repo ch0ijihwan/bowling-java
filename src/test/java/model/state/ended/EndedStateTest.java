@@ -1,5 +1,6 @@
 package model.state.ended;
 
+import model.frame.Score;
 import model.pin.PinCount;
 import model.state.BowlingState;
 import model.state.running.SecondPitch;
@@ -20,6 +21,16 @@ class EndedStateTest {
         @Override
         public Status getStatus() {
             return Status.MISS;
+        }
+
+        @Override
+        public Score getScore() {
+            return null;
+        }
+
+        @Override
+        public Score addScore(Score currentScore) {
+            return null;
         }
     };
 

@@ -1,5 +1,6 @@
 package model.state.running;
 
+import model.frame.Score;
 import model.pin.PinCount;
 import model.state.BowlingState;
 import model.state.ended.Miss;
@@ -7,8 +8,7 @@ import model.state.ended.Spare;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
+import static org.assertj.core.api.Assertions.*;
 
 class SecondPitchTest {
 
@@ -53,5 +53,31 @@ class SecondPitchTest {
 
         //then
         assertThat(actual).isInstanceOf(Miss.class);
+    }
+
+    @Test
+    @DisplayName("투구 중인 상태에서는 점수를 확인 할 수 없습니다.")
+    void getScore() {
+        //given
+        RunningState runningState = SecondPitch.create(new PinCount(1));
+
+        //when
+        assertThatIllegalStateException().isThrownBy(runningState::getScore)
+                .withMessage("투구 실행 중에는 점수를 확인 할 수 없습니다.");
+    }
+
+    @Test
+    @DisplayName("점수를 추가한다.")
+    void addScore() {
+        //given
+        RunningState runningState = SecondPitch.create(new PinCount(3));
+        Score score = Score.createSpareScore();
+        int expect = 13;
+
+        //when
+        Score actual = runningState.addScore(score);
+
+        //then
+        assertThat(actual).hasFieldOrPropertyWithValue("score", expect);
     }
 }

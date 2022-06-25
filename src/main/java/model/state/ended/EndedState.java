@@ -10,7 +10,7 @@ public abstract class EndedState implements BowlingState {
     }
 
     @Override
-    public boolean isEnd() {
+    public boolean isEnd(){
         return true;
     }
 }

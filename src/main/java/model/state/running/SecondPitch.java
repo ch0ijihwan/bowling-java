@@ -1,5 +1,6 @@
 package model.state.running;
 
+import model.frame.Score;
 import model.pin.PinCount;
 import model.state.BowlingState;
 import model.state.ended.Miss;
@@ -45,5 +46,14 @@ public class SecondPitch extends RunningState {
             return ZERO_SYMBOL;
         }
         return String.valueOf(firstPinCount.getValue());
+    }
+
+    @Override
+    public Score addScore(final Score currentScore) {
+        Score sumScore = this.firstPinCount.sumScore(currentScore);
+        if (!sumScore.hasRemainingBonusCount()) {
+            return sumScore;
+        }
+        throw new IllegalStateException("투구 중인 상태에서는 점수를 확인 할 수 없습니다.");
     }
 }
