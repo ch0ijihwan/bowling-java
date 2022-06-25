@@ -14,7 +14,7 @@ public interface BowlingState {
 
     Status getStatus();
 
-    Score getScore();
+    Score createScore();
 
-    Score addScore(Score currentScore);
+    Score calculateScore(Score currentScore);
 }

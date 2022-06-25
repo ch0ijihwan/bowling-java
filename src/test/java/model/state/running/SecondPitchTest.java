@@ -63,7 +63,7 @@ class SecondPitchTest {
         RunningState runningState = SecondPitch.create(new PinCount(1));
 
         //when
-        assertThatThrownBy(runningState::getScore).isInstanceOf(NotCountScore.class)
+        assertThatThrownBy(runningState::createScore).isInstanceOf(NotCountScore.class)
                 .hasMessage("투구 실행 중에는 점수를 확인 할 수 없습니다.");
     }
 
@@ -76,7 +76,7 @@ class SecondPitchTest {
         int expect = 13;
 
         //when
-        Score actual = runningState.addScore(score);
+        Score actual = runningState.calculateScore(score);
 
         //then
         assertThat(actual).hasFieldOrPropertyWithValue("score", expect);

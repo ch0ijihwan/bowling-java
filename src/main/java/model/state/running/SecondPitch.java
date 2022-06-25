@@ -50,7 +50,7 @@ public class SecondPitch extends RunningState {
     }
 
     @Override
-    public Score addScore(final Score currentScore) {
+    public Score calculateScore(final Score currentScore) {
         Score sumScore = this.firstPinCount.sumScore(currentScore);
         if (!sumScore.hasRemainingBonusCount()) {
             return sumScore;

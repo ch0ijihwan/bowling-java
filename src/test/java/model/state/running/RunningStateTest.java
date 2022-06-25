@@ -27,7 +27,7 @@ class RunningStateTest {
             }
 
             @Override
-            public Score addScore(final Score currentScore) {
+            public Score calculateScore(final Score currentScore) {
                 throw  new IllegalStateException("테스트 코드 중 해당 메서드를 사용하지 않습니다.");
             }
         };
@@ -47,7 +47,7 @@ class RunningStateTest {
     @DisplayName("투구 실행 도중에는 점수를 확인 할 수 없다.")
     void getScore() {
         //when
-        assertThatThrownBy(runningState::getScore).isInstanceOf(NotCountScore.class)
+        assertThatThrownBy(runningState::createScore).isInstanceOf(NotCountScore.class)
                 .hasMessage("투구 실행 중에는 점수를 확인 할 수 없습니다.");
     }
 }

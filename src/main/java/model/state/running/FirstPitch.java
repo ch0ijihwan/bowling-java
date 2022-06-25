@@ -31,7 +31,7 @@ public class FirstPitch extends RunningState {
     }
 
     @Override
-    public Score addScore(final Score currentScore) {
+    public Score calculateScore(final Score currentScore) {
         throw new NotCountScore("투구 중인 상태에서는 점수를 확인 할 수 없습니다.");
     }
 }
