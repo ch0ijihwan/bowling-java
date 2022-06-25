@@ -1,14 +1,14 @@
 package model.state.running;
 
-import model.frame.Score;
+import model.frame.score.NotCountScore;
+import model.frame.score.Score;
 import model.pin.PinCount;
 import model.state.BowlingState;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatIllegalStateException;
+import static org.assertj.core.api.Assertions.*;
 
 class RunningStateTest {
     private BowlingState runningState;
@@ -47,7 +47,7 @@ class RunningStateTest {
     @DisplayName("투구 실행 도중에는 점수를 확인 할 수 없다.")
     void getScore() {
         //when
-        assertThatIllegalStateException().isThrownBy(runningState::getScore)
-                .withMessage("투구 실행 중에는 점수를 확인 할 수 없습니다.");
+        assertThatThrownBy(runningState::getScore).isInstanceOf(NotCountScore.class)
+                .hasMessage("투구 실행 중에는 점수를 확인 할 수 없습니다.");
     }
 }

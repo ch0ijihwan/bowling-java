@@ -1,6 +1,6 @@
 package model.state.ended;
 
-import model.frame.Score;
+import model.frame.score.Score;
 import model.pin.PinCount;
 import model.state.BowlingState;
 import model.state.status.Status;
@@ -13,7 +13,7 @@ public class Miss extends EndedState {
     private final PinCount firstPinCount;
     private final PinCount secondPinCount;
 
-    public static BowlingState create(final PinCount firstPinCount, final PinCount secondPinCount){
+    public static BowlingState create(final PinCount firstPinCount, final PinCount secondPinCount) {
         return new Miss(firstPinCount, secondPinCount);
     }
 
@@ -24,7 +24,7 @@ public class Miss extends EndedState {
 
     @Override
     public String getScoreSymbol() {
-        if(firstPinCount.getValue() == 0){
+        if (firstPinCount.getValue() == 0) {
             return ZERO_SYMBOL + DELIMITER + secondPinCount.getValue();
         }
         return firstPinCount.getValue() + DELIMITER + secondPinCount.getValue();
@@ -47,7 +47,7 @@ public class Miss extends EndedState {
     @Override
     public Score addScore(final Score currentScore) {
         Score addFirstPinCountScore = firstPinCount.sumScore(currentScore);
-        if(!addFirstPinCountScore.hasRemainingBonusCount()){
+        if (!addFirstPinCountScore.hasRemainingBonusCount()) {
             return addFirstPinCountScore;
         }
         return secondPinCount.sumScore(addFirstPinCountScore);

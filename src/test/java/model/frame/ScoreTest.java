@@ -1,5 +1,7 @@
 package model.frame;
 
+import model.frame.score.NotCountScore;
+import model.frame.score.Score;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -34,7 +36,7 @@ class ScoreTest {
         int expect = 16;
 
         //when
-        int actual = score.getScore();
+        int actual = score.getScoreValue();
 
         //then
         assertThat(actual).isEqualTo(expect);
@@ -47,8 +49,8 @@ class ScoreTest {
         Score score = Score.createStrikeScore().bowl(5);
 
         //when
-        assertThatIllegalStateException().isThrownBy(score::getScore)
-                .withMessage("추가 득점 기회가 남아 있어, 점수를 확인 할 수 없습니다.");
+        assertThatThrownBy(score::getScoreValue).isInstanceOf(NotCountScore.class)
+                .hasMessage("추가 득점 기회가 남아 있어, 점수를 확인 할 수 없습니다.");
     }
 
     @Test

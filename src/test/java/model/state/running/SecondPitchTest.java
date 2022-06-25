@@ -1,6 +1,7 @@
 package model.state.running;
 
-import model.frame.Score;
+import model.frame.score.NotCountScore;
+import model.frame.score.Score;
 import model.pin.PinCount;
 import model.state.BowlingState;
 import model.state.ended.Miss;
@@ -62,8 +63,8 @@ class SecondPitchTest {
         RunningState runningState = SecondPitch.create(new PinCount(1));
 
         //when
-        assertThatIllegalStateException().isThrownBy(runningState::getScore)
-                .withMessage("투구 실행 중에는 점수를 확인 할 수 없습니다.");
+        assertThatThrownBy(runningState::getScore).isInstanceOf(NotCountScore.class)
+                .hasMessage("투구 실행 중에는 점수를 확인 할 수 없습니다.");
     }
 
     @Test

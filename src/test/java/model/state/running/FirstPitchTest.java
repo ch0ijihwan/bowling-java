@@ -1,5 +1,6 @@
 package model.state.running;
 
+import model.frame.score.NotCountScore;
 import model.pin.PinCount;
 import model.state.BowlingState;
 import model.state.ended.Strike;
@@ -11,8 +12,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.stream.Stream;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatIllegalStateException;
+import static org.assertj.core.api.Assertions.*;
 
 class FirstPitchTest {
 
@@ -45,7 +45,7 @@ class FirstPitchTest {
         RunningState runningState = FirstPitch.create();
 
         //when
-        assertThatIllegalStateException().isThrownBy(runningState::getScore)
-                .withMessage("투구 실행 중에는 점수를 확인 할 수 없습니다.");
+        assertThatThrownBy(runningState::getScore).isInstanceOf(NotCountScore.class)
+                .hasMessage("투구 실행 중에는 점수를 확인 할 수 없습니다.");
     }
 }

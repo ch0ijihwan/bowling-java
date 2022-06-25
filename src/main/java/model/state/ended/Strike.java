@@ -1,6 +1,6 @@
 package model.state.ended;
 
-import model.frame.Score;
+import model.frame.score.Score;
 import model.state.BowlingState;
 import model.state.status.Status;
 
