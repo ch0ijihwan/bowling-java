@@ -72,6 +72,7 @@ class NormalFrameTest {
     @Test
     @DisplayName("인덱스를 반환한다.")
     void getIndex() {
+        //given
         Frame firstFrame = NormalFrame.createFirst();
         Frame secondFrame = firstFrame.bowl(new PinCount(10));
         Frame thirdFrame = secondFrame.bowl(new PinCount(10));
@@ -84,15 +85,18 @@ class NormalFrameTest {
     }
 
     @Test
-    @DisplayName("점수를 반환받는다.'")
+    @DisplayName("점수를 반환받는다.")
     void getScore() {
         //given
-        Frame firstFrame = NormalFrame.createFirst();
+        Frame frame = NormalFrame.createFirst()
+                .bowl(new PinCount(1));
+
+        int expect = -1;
+
         //given
-        Frame nextFrame = firstFrame.bowl(new PinCount(1));
-        int score = nextFrame.getScore();
+        int actual = frame.getScore();
 
         //then
-        System.out.println(score);
+        assertThat(actual).isEqualTo(expect);
     }
 }
