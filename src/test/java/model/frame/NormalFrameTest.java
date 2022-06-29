@@ -85,7 +85,7 @@ class NormalFrameTest {
     }
 
     @Test
-    @DisplayName("점수를 반환받는다.")
+    @DisplayName("추가 투구 기회가 있는 경우 -1 스코어를 반환한다.")
     void getScore() {
         //given
         Frame frame = NormalFrame.createFirst()
