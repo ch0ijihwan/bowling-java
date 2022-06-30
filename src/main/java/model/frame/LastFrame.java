@@ -7,8 +7,8 @@ import model.state.BowlingState;
 import model.state.running.FirstPitch;
 import model.state.status.Status;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.ArrayDeque;
+import java.util.Deque;
 import java.util.stream.Collectors;
 
 public class LastFrame implements Frame {
@@ -16,8 +16,9 @@ public class LastFrame implements Frame {
     private static final int MAXIMUM_BOWL_COUNT = 3;
     private static final int MINIMUM_BOWL_COUNT = 2;
     private static final int LAST_FRAME_INDEX = 10;
+    private static final String DELIMITER = "|";
 
-    private final List<BowlingState> states = new ArrayList<>();
+    private final Deque<BowlingState> states = new ArrayDeque<>();
     private int bowlCount;
 
     private LastFrame() {
@@ -31,14 +32,14 @@ public class LastFrame implements Frame {
 
     @Override
     public Frame bowl(final PinCount pinCount) {
-        BowlingState current = getLastState();
+        BowlingState current = states.getLast();
 
         if (isStrikeOrSpare(current)) {
             bonusBowl(pinCount);
             return this;
         }
 
-        states.remove(getStatesLastIndex());
+        states.removeLast();
         states.add(current.bowl(pinCount));
         bowlCount++;
         return this;
@@ -49,14 +50,6 @@ public class LastFrame implements Frame {
                 .bowl(pinCount);
         states.add(bonusBowl);
         bowlCount++;
-    }
-
-    private int getStatesLastIndex() {
-        return states.size() - 1;
-    }
-
-    private BowlingState getLastState() {
-        return states.get(getStatesLastIndex());
     }
 
     private boolean isStrikeOrSpare(final BowlingState currentBowlingState) {
@@ -74,15 +67,14 @@ public class LastFrame implements Frame {
             return true;
         }
 
-        BowlingState lastState = getLastState();
-        return bowlCount == MINIMUM_BOWL_COUNT && lastState.getStatus() == Status.MISS;
+        return bowlCount == MINIMUM_BOWL_COUNT && states.getLast().getStatus() == Status.MISS;
     }
 
     @Override
     public String getScoreSymbol() {
         return states.stream()
                 .map(BowlingState::getScoreSymbol)
-                .collect(Collectors.joining("|"));
+                .collect(Collectors.joining(DELIMITER));
     }
 
     @Override
@@ -90,22 +82,25 @@ public class LastFrame implements Frame {
         try {
             return calculateScore().getScoreValue();
         } catch (NotCountScore e) {
-            return Score.createCanNotCalculateScore().getScoreValue();
+            return Score.createCanNotCalculateScore()
+                    .getScoreValue();
         }
     }
 
     private Score calculateScore() throws NotCountScore {
-        Score score = states.get(0).createScore();
-        for (int i = 1; i < states.size(); i++) {
-            score = states.get(i).calculateScore(score);
+        Deque<BowlingState> currentStates  = new ArrayDeque<>(states);
+        Score score = currentStates.removeFirst()
+                .createScore();
+        while (!currentStates.isEmpty()){
+            score = currentStates.removeFirst()
+                    .calculateScore(score);
         }
         return score;
     }
 
-
     @Override
     public Score addScore(final Score currentScore) {
-        if(getLastState().isEnd()){
+        if (states.getLast().isEnd()) {
             return calculateScore();
         }
         throw new NotCountScore("마지막 라운드의 추가 투구 기회가 남아있습니다.");
