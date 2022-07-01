@@ -8,7 +8,9 @@ import model.state.running.FirstPitch;
 import model.state.status.Status;
 
 import java.util.ArrayDeque;
+import java.util.ArrayList;
 import java.util.Deque;
+import java.util.List;
 import java.util.stream.Collectors;
 
 public class LastFrame implements Frame {
@@ -16,6 +18,8 @@ public class LastFrame implements Frame {
     private static final int MAXIMUM_BOWL_COUNT = 3;
     private static final int MINIMUM_BOWL_COUNT = 2;
     private static final int LAST_FRAME_INDEX = 10;
+    private static final int FIRST_STATE_INDEX = 0;
+    public static final int SECOND_STATE_INDEX = 1;
     private static final String DELIMITER = "|";
 
     private final Deque<BowlingState> states = new ArrayDeque<>();
@@ -88,10 +92,10 @@ public class LastFrame implements Frame {
     }
 
     private Score calculateScore() throws NotCountScore {
-        Deque<BowlingState> currentStates  = new ArrayDeque<>(states);
+        Deque<BowlingState> currentStates = new ArrayDeque<>(states);
         Score score = currentStates.removeFirst()
                 .createScore();
-        while (!currentStates.isEmpty()){
+        while (!currentStates.isEmpty()) {
             score = currentStates.removeFirst()
                     .calculateScore(score);
         }
@@ -100,17 +104,19 @@ public class LastFrame implements Frame {
 
     @Override
     public Score addScore(final Score currentScore) {
-        if (states.getLast().isEnd()) {
+        List<BowlingState> currentStates = new ArrayList<>(states);
+        Score firstScoreCombined = currentStates.get(FIRST_STATE_INDEX)
+                .calculateScore(currentScore);
+        if (currentScore.hasNumberOfRemainingBonusCount(1)) {
+            return firstScoreCombined;
+        }
+        if (currentScore.hasNumberOfRemainingBonusCount(2) && states.size() == 2) {
+            return currentStates.get(SECOND_STATE_INDEX)
+                    .calculateScore(firstScoreCombined);
+        }
+        if (this.isEnd()) {
             return calculateScore();
         }
-        throw new NotCountScore("마지막 라운드의 추가 투구 기회가 남아있습니다.");
-    }
-
-    @Override
-    public String toString() {
-        return "LastFrame{" +
-                "states=" + states +
-                ", bowlCount=" + bowlCount +
-                '}';
+        throw new NotCountScore("아직 추가 투구 기회가 남았습니다.");
     }
 }
