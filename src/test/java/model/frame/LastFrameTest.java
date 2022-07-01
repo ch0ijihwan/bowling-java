@@ -135,17 +135,28 @@ class LastFrameTest {
         assertThat(actual).isEqualTo(expect);
     }
 
-    @Test
-    @DisplayName("점수를 받아서, 합친 후 반환한다. ")
-    void addScore() {
+    @ParameterizedTest
+    @DisplayName("점수를 받아서, 합친 후 반환한다. - 받은 스코어가 추가 득점 기회가 있는 경우")
+    @MethodSource("currentScoreParameterProvider")
+    void addScoreWhenStrike(final Score currentScore, final int expect) {
         //given
-        Frame lastFrame = LastFrame.create().bowl(new PinCount(10)).bowl(new PinCount(10)).bowl(new PinCount(10));
+        Frame lastFrame = LastFrame.create()
+                .bowl(new PinCount(10))
+                .bowl(new PinCount(10))
+                .bowl(new PinCount(10));
 
         //when
-        Score actual = lastFrame.addScore(Score.createStrikeScore());
+        Score actual = lastFrame.addScore(currentScore);
 
         //then
-        assertThat(actual.getScoreValue()).isEqualTo(30);
+        assertThat(actual.getScoreValue()).isEqualTo(expect);
+    }
+
+    private static Stream<Arguments> currentScoreParameterProvider() {
+        return Stream.of(
+                Arguments.of(Score.createStrikeScore(), 30),
+                Arguments.of(Score.createSpareScore(), 20)
+        );
     }
 }
 
