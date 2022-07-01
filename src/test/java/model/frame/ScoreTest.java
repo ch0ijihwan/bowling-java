@@ -120,8 +120,22 @@ class ScoreTest {
         assertThat(actual).isEqualTo(expect);
     }
 
+
+    @ParameterizedTest
+    @DisplayName("입력 받은 보너스 점수 기회가 현재 가지고 있는 기회와 일치하면 true를 반환한다.")
+    @MethodSource("scoreParameterProvider")
+    void hasNumberOfRemainingBonusCount(final Score score, final int input) {
+        //when
+        boolean actual = score.hasNumberOfRemainingBonusCount(input);
+
+        //then
+        assertThat(actual).isTrue();
+    }
+
     private static Stream<Arguments> scoreParameterProvider() {
-        return Stream.of(Arguments.of(Score.createSpareScore(), true),
-                Arguments.of(Score.createMissScore(1), false));
+        return Stream.of(
+                Arguments.of(Score.createStrikeScore(), 2),
+                Arguments.of(Score.createSpareScore(), 1),
+                Arguments.of(Score.createMissScore(1), 0));
     }
 }
