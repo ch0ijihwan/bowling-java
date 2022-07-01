@@ -37,14 +37,14 @@ public class Score {
     }
 
     public int getScoreValue() {
-        if (hasRemainingBonusCount()) {
+        if (!hasNumberOfRemainingBonusCount(0)) {
             throw new NotCountScore("추가 득점 기회가 남아 있어, 점수를 확인 할 수 없습니다.");
         }
         return this.score;
     }
 
-    public boolean hasRemainingBonusCount() {
-        return remainingBonusCount > 0;
+    public boolean hasNumberOfRemainingBonusCount(final int expectBonusCount) {
+        return remainingBonusCount == expectBonusCount;
     }
 
     @Override

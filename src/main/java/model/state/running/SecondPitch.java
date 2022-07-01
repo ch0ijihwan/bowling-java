@@ -52,7 +52,7 @@ public class SecondPitch extends RunningState {
     @Override
     public Score calculateScore(final Score currentScore) {
         Score sumScore = this.firstPinCount.sumScore(currentScore);
-        if (!sumScore.hasRemainingBonusCount()) {
+        if (sumScore.hasNumberOfRemainingBonusCount(0)) {
             return sumScore;
         }
         throw new NotCountScore("투구 중인 상태에서는 점수를 확인 할 수 없습니다.");

@@ -29,7 +29,7 @@ public class Strike extends EndedState {
 
     @Override
     public Score calculateScore(final Score currentScore) {
-       if (!currentScore.hasRemainingBonusCount()){
+       if (currentScore.hasNumberOfRemainingBonusCount(0)){
            return currentScore;
        }
         return currentScore.bowl(10);

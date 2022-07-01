@@ -68,21 +68,17 @@ public class NormalFrame implements Frame {
 
     private Score calculateScore() throws NotCountScore {
         Score score = state.createScore();
-        if (!hasBonusChance(score)) {
+        if (score.hasNumberOfRemainingBonusCount(0)) {
             return score;
         }
         return nextFrame.addScore(score);
 
     }
 
-    private boolean hasBonusChance(final Score score) {
-        return score.hasRemainingBonusCount();
-    }
-
     @Override
     public Score addScore(final Score currentScore) throws NotCountScore{
         Score score = state.calculateScore(currentScore);
-        if (!hasBonusChance(score)) {
+        if (score.hasNumberOfRemainingBonusCount(0)) {
             return score;
         }
         return nextFrame.addScore(score);
