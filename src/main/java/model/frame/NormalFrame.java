@@ -13,7 +13,7 @@ public class NormalFrame implements Frame {
 
     private final int index;
     private BowlingState state;
-    private  Frame nextFrame;
+    private Frame nextFrame;
 
     private NormalFrame(final int index) {
         this.index = index;
@@ -36,7 +36,7 @@ public class NormalFrame implements Frame {
     }
 
     private Frame createNextFrame() {
-        if(this.index == LAST_INDEX_OF_NORMAL_FRAME){
+        if (this.index == LAST_INDEX_OF_NORMAL_FRAME) {
             return LastFrame.create();
         }
         return new NormalFrame(this.index + 1);
@@ -76,7 +76,7 @@ public class NormalFrame implements Frame {
     }
 
     @Override
-    public Score addScore(final Score currentScore) throws NotCountScore{
+    public Score addScore(final Score currentScore) throws NotCountScore {
         Score score = state.calculateScore(currentScore);
         if (score.hasNumberOfRemainingBonusCount(0)) {
             return score;
