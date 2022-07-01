@@ -24,10 +24,17 @@ public class Miss extends EndedState {
 
     @Override
     public String getScoreSymbol() {
-        if (firstPinCount.getValue() == 0) {
-            return ZERO_SYMBOL + DELIMITER + secondPinCount.getValue();
+        if (firstPinCount.getValue() == 0 || secondPinCount.getValue() == 0) {
+            return changeGutterFormat(firstPinCount) + DELIMITER + changeGutterFormat(secondPinCount);
         }
         return firstPinCount.getValue() + DELIMITER + secondPinCount.getValue();
+    }
+
+    private String changeGutterFormat(final PinCount pinCount) {
+        if (pinCount.getValue() == 0) {
+            return ZERO_SYMBOL;
+        }
+        return String.valueOf(pinCount.getValue());
     }
 
     @Override
