@@ -3,6 +3,7 @@ package model;
 import model.frame.Frame;
 import model.frame.Frames;
 import model.pin.PinCount;
+import model.player.Player;
 
 import java.util.ArrayList;
 import java.util.List;

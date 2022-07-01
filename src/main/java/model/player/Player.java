@@ -1,4 +1,4 @@
-package model;
+package model.player;
 
 import java.util.Objects;
 import java.util.regex.Matcher;

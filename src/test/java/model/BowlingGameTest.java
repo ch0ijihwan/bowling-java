@@ -3,6 +3,7 @@ package model;
 import model.frame.Frame;
 import model.frame.Frames;
 import model.pin.PinCount;
+import model.player.Player;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

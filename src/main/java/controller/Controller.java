@@ -1,7 +1,7 @@
 package controller;
 
 import model.BowlingGame;
-import model.Player;
+import model.player.Player;
 import model.frame.Frames;
 import model.pin.PinCount;
 import view.input.Input;

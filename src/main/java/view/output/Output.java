@@ -1,6 +1,6 @@
 package view.output;
 
-import model.Player;
+import model.player.Player;
 import model.frame.Frames;
 
 public interface Output {
