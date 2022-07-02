@@ -76,4 +76,43 @@ class PlayersTest {
         assertThat(players.getPlayerFrames(1).getLastFrameIndex()).isEqualTo(2);
         assertThat(players.getPlayerFrames(2).getLastFrameIndex()).isEqualTo(1);
     }
+
+    @Test
+    @DisplayName("투구를 할 수 있으면 true 반환 - 투구가 남아 있을 경우")
+    void hasNextPitching() {
+        //given
+        Players players = new Players();
+        players.addPlayer("ABC");
+        players.addPlayer("QWE");
+        repeatTwentyThreeStrikeBowl(players);
+
+        //when
+        boolean actual = players.hasNextPitching();
+
+        //then
+        assertThat(actual).isTrue();
+    }
+
+    private void repeatTwentyThreeStrikeBowl(final Players players) {
+        for (int i = 0; i < 23; i++) {
+            players.bowl(10);
+        }
+    }
+
+    @Test
+    @DisplayName("투구를 할 수 없으면 false 반환 - 투구가 남아 있지 않을 경우")
+    void hasNextPitching2() {
+        //given
+        Players players = new Players();
+        players.addPlayer("ABC");
+        players.addPlayer("QWE");
+        repeatTwentyThreeStrikeBowl(players);
+        players.bowl(10);
+
+        //when
+        boolean actual = players.hasNextPitching();
+
+        //then
+        assertThat(actual).isFalse();
+    }
 }
