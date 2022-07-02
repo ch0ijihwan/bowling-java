@@ -1,12 +1,10 @@
 package model;
 
-import model.frame.Frame;
+import model.frame.Frames;
 import model.pin.PinCount;
 import model.player.Player;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-
-import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -31,10 +29,10 @@ class PlayerTest {
         //given
         Player player = new Player("ABC");
 
-        List<Frame> actual = player.getFrames();
+        Frames actual = player.getFrames();
 
         //then
-        assertThat(actual).hasSize(1);
+        assertThat(actual.getFrames()).hasSize(1);
     }
 
     @Test
@@ -47,6 +45,6 @@ class PlayerTest {
         player.bowl(new PinCount(10));
 
         //then
-        assertThat(player.getFrames()).hasSize(2);
+        assertThat(player.getFrames().getFrames()).hasSize(2);
     }
 }
