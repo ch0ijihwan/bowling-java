@@ -1,13 +1,14 @@
 package model;
 
+import model.frame.Frame;
+import model.pin.PinCount;
 import model.player.Player;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.ValueSource;
+
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatIllegalStateException;
 
 class PlayerTest {
 
@@ -24,12 +25,28 @@ class PlayerTest {
         assertThat(actual).isEqualTo("ABC");
     }
 
-    @ParameterizedTest
-    @ValueSource(strings = {"abc","123","A"})
-    @DisplayName("플레이어의 이름은 3글자이며 대문자로 구성되어있다.")
-    void validatePlayerName(final String name) {
+    @Test
+    @DisplayName("Frames 를 반환한다.")
+    void getFrames() {
+        //given
+        Player player = new Player("ABC");
+
+        List<Frame> actual = player.getFrames();
+
+        //then
+        assertThat(actual).hasSize(1);
+    }
+
+    @Test
+    @DisplayName("투구를 실행한다.")
+    void bowl() {
+        //given
+        Player player = new Player("ABC");
+
         //when
-        assertThatIllegalStateException().isThrownBy(() -> new Player(name))
-                .withMessage("플레이어의 이름은 알파벳 대문자로 구성된 3자리 이니셜 입니다.");
+        player.bowl(new PinCount(10));
+
+        //then
+        assertThat(player.getFrames()).hasSize(2);
     }
 }
