@@ -46,73 +46,11 @@ class PlayersTest {
         Players players = new Players();
         players.addPlayer("ABC");
         players.addPlayer("QWE");
-        players.bowl(10);
-        //when
-        Frames firstPlayerFrame = players.getPlayerFrames(0);
-        Frames secondPlayerFrame = players.getPlayerFrames(1);
-
-        //then
-        assertThat(firstPlayerFrame.getFrames()).hasSize(2);
-        assertThat(secondPlayerFrame.getFrames()).hasSize(1);
-    }
-
-    @Test
-    @DisplayName("투구를 진행한다.")
-    void playerBowl() {
-        //given
-        Players players = new Players();
-        players.addPlayer("ABC");
-        players.addPlayer("QWE");
-        players.addPlayer("OPI");
 
         //when
-        players.bowl(10);
-        players.bowl(1);
-        players.bowl(1);
-        players.bowl(0);
+        Frames actual = players.getPlayerFrames(0);
 
         //then
-        assertThat(players.getPlayerFrames(0).getLastFrameIndex()).isEqualTo(2);
-        assertThat(players.getPlayerFrames(1).getLastFrameIndex()).isEqualTo(2);
-        assertThat(players.getPlayerFrames(2).getLastFrameIndex()).isEqualTo(1);
-    }
-
-    @Test
-    @DisplayName("투구를 할 수 있으면 true 반환 - 투구가 남아 있을 경우")
-    void hasNextPitching() {
-        //given
-        Players players = new Players();
-        players.addPlayer("ABC");
-        players.addPlayer("QWE");
-        repeatTwentyThreeStrikeBowl(players);
-
-        //when
-        boolean actual = players.hasNextPitching();
-
-        //then
-        assertThat(actual).isTrue();
-    }
-
-    private void repeatTwentyThreeStrikeBowl(final Players players) {
-        for (int i = 0; i < 23; i++) {
-            players.bowl(10);
-        }
-    }
-
-    @Test
-    @DisplayName("투구를 할 수 없으면 false 반환 - 투구가 남아 있지 않을 경우")
-    void hasNextPitching2() {
-        //given
-        Players players = new Players();
-        players.addPlayer("ABC");
-        players.addPlayer("QWE");
-        repeatTwentyThreeStrikeBowl(players);
-        players.bowl(10);
-
-        //when
-        boolean actual = players.hasNextPitching();
-
-        //then
-        assertThat(actual).isFalse();
+        assertThat(actual.getLastFrameIndex()).isEqualTo(1);
     }
 }
