@@ -29,6 +29,7 @@ class PlayerTest {
         //given
         Player player = new Player("ABC");
 
+        //when
         Frames actual = player.getFrames();
 
         //then
