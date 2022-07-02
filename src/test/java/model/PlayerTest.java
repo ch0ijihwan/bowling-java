@@ -47,4 +47,21 @@ class PlayerTest {
         //then
         assertThat(player.getFrames().getFrames()).hasSize(2);
     }
+
+    @Test
+    @DisplayName("해당 위치에 있는 프레임이 종료 되었으면 true 를 반환한다.")
+    void didBowlingEndAt() {
+        //given
+        Player player = new Player("ABC");
+        player.bowl(new PinCount(10));
+        player.bowl(new PinCount(1));
+
+        //when
+        boolean actualAtFirst = player.didBowlingEndAt(0);
+        boolean actualAtSecond = player.didBowlingEndAt(1);
+
+        //then
+        assertThat(actualAtFirst).isTrue();
+        assertThat(actualAtSecond).isFalse();
+    }
 }
