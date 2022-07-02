@@ -1,30 +1,33 @@
 package model.player;
 
+import model.frame.Frame;
+import model.frame.Frames;
+import model.pin.PinCount;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class Player {
 
-    private static final Pattern NAME_PATTERN = Pattern.compile("^[A-Z]*$");
-    private static final int NAME_SIZE = 3;
-
-    private final String name;
+    private final PlayerName name;
+    private final Frames frames;
 
     public Player(final String name) {
-        validatePlayerName(name);
-        this.name = name;
-    }
-
-    private void validatePlayerName(final String name) {
-        Matcher matcher = NAME_PATTERN.matcher(name);
-        if (!matcher.matches() || name.length() != NAME_SIZE) {
-            throw new IllegalStateException("플레이어의 이름은 알파벳 대문자로 구성된 3자리 이니셜 입니다.");
-        }
+        this.name = new PlayerName(name);
+        this.frames = Frames.createFirst();
     }
 
     public String getPlayerName() {
-        return name;
+        return name.getName();
+    }
+
+    public List<Frame> getFrames() {
+        return new ArrayList<>(frames.getFrames());
+    }
+
+    public void bowl(final PinCount pinCount) {
+        frames.bowl(pinCount);
     }
 
     @Override
@@ -39,4 +42,5 @@ public class Player {
     public int hashCode() {
         return Objects.hash(name);
     }
+
 }
