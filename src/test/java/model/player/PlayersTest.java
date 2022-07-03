@@ -38,19 +38,4 @@ class PlayersTest {
         //then
         assertThat(players.getPlayers()).hasSize(expect);
     }
-
-    @Test
-    @DisplayName("해당하는 인덱스에 있는 플레이어의 프레임을 반환한다.")
-    void getFrameByPlayer() {
-        //given
-        Players players = new Players();
-        players.addPlayer("ABC");
-        players.addPlayer("QWE");
-
-        //when
-        Frames actual = players.getPlayerFrames(0);
-
-        //then
-        assertThat(actual.getLastFrameIndex()).isEqualTo(1);
-    }
 }
