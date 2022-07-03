@@ -14,14 +14,14 @@ class FramesTest {
     @DisplayName("첫번째 프레임을 생성한다.")
     void createFirst() {
         //given
-        List<Frame> expect = List.of(NormalFrame.createFirst());
+        int expect = 0;
 
         //when
         Frames frames = Frames.createFirst();
         int actual = frames.getLastFrameIndex();
 
         //then
-        assertThat(actual).isEqualTo(0);
+        assertThat(actual).isEqualTo(expect);
     }
 
     @Test
@@ -34,7 +34,7 @@ class FramesTest {
         frames.bowl(new PinCount(1));
 
         //then
-        assertThat(frames.getLastFrameIndex()).isEqualTo(0);
+        assertThat(frames.getLastFrameIndex()).isZero();
     }
 
     @Test
