@@ -21,7 +21,7 @@ class FramesTest {
         int actual = frames.getLastFrameIndex();
 
         //then
-        assertThat(actual).isEqualTo(1);
+        assertThat(actual).isEqualTo(0);
     }
 
     @Test
@@ -34,7 +34,7 @@ class FramesTest {
         frames.bowl(new PinCount(1));
 
         //then
-        assertThat(frames.getLastFrameIndex()).isEqualTo(1);
+        assertThat(frames.getLastFrameIndex()).isEqualTo(0);
     }
 
     @Test
@@ -47,7 +47,7 @@ class FramesTest {
         frames.bowl(new PinCount(10));
 
         //then
-        assertThat(frames.getLastFrameIndex()).isEqualTo(2);
+        assertThat(frames.getLastFrameIndex()).isEqualTo(1);
     }
 
     @Test
@@ -61,7 +61,7 @@ class FramesTest {
         frames.bowl(new PinCount(4));
 
         //then
-        assertThat(frames.getLastFrameIndex()).isEqualTo(2);
+        assertThat(frames.getLastFrameIndex()).isEqualTo(1);
     }
 
     @Test

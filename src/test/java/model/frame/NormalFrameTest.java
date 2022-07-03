@@ -18,7 +18,7 @@ class NormalFrameTest {
         int actual = firstFrame.getIndex();
 
         //then
-        assertThat(actual).isEqualTo(1);
+        assertThat(actual).isEqualTo(0);
     }
 
     @Test
@@ -45,7 +45,7 @@ class NormalFrameTest {
         Frame nextFrame = firstFrame.bowl(new PinCount(10));
 
         //then
-        assertThat(nextFrame.getIndex()).isEqualTo(2);
+        assertThat(nextFrame.getIndex()).isEqualTo(1);
     }
 
     @Test
@@ -81,7 +81,7 @@ class NormalFrameTest {
         int actual = thirdFrame.getIndex();
 
         //then
-        assertThat(actual).isEqualTo(3);
+        assertThat(actual).isEqualTo(2);
     }
 
     @Test
