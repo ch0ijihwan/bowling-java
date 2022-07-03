@@ -11,14 +11,6 @@ public class Players {
         this.players = players;
     }
 
-    public Players() {
-        players = new ArrayList<>();
-    }
-
-    public void addPlayer(final String name) {
-        players.add(new Player(name));
-    }
-
     public List<Player> getPlayers() {
         return new ArrayList<>(players);
     }
