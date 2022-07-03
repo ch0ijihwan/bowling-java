@@ -11,6 +11,7 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class Controller {
+
     private final Input input;
     private final Output output;
 
@@ -21,21 +22,24 @@ public class Controller {
 
     public void run() {
         int numberOfPlayer = input.inputNumberOfPlayer();
-        List<Player> playerList = IntStream.range(0, numberOfPlayer)
-                .mapToObj(number -> new Player(input.inputPlayerName(number)))
-                .collect(Collectors.toUnmodifiableList());
-        Players players = new Players(playerList);
-
+        Players players = createPlayers(numberOfPlayer);
         output.printCurrentStatus(players);
         while (players.hasNextPitching()) {
             players.getPlayers()
                     .forEach(player -> playFrame(player, players));
         }
-
     }
 
-    private void playFrame(Player player, Players players) {
-        int lastFrameIndex = player.getFrames().getLastFrameIndex();
+    private Players createPlayers(final int numberOfPlayer) {
+        List<Player> playerList = IntStream.range(0, numberOfPlayer)
+                .mapToObj(number -> new Player(input.inputPlayerName(number)))
+                .collect(Collectors.toUnmodifiableList());
+        return new Players(playerList);
+    }
+
+    private void playFrame(final Player player, final Players players) {
+        int lastFrameIndex = player.getFrames()
+                .getLastFrameIndex();
         while (!player.didBowlingEndAt(lastFrameIndex)) {
             player.bowl(new PinCount(input.inputKnockedDownPinCount(player.getPlayerName())));
             output.printCurrentStatus(players);
