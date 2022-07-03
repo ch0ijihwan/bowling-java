@@ -17,7 +17,7 @@ public class LastFrame implements Frame {
 
     private static final int MAXIMUM_BOWL_COUNT = 3;
     private static final int MINIMUM_BOWL_COUNT = 2;
-    private static final int LAST_FRAME_INDEX = 10;
+    private static final int LAST_FRAME_INDEX = 9;
     private static final int FIRST_STATE_INDEX = 0;
     public static final int SECOND_STATE_INDEX = 1;
     private static final String DELIMITER = "|";
