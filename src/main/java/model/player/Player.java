@@ -27,6 +27,12 @@ public class Player {
         frames.bowl(pinCount);
     }
 
+    public boolean didBowlingEndAt(final int index) {
+        return frames.getFrames()
+                .get(index)
+                .isEnd();
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -38,11 +44,5 @@ public class Player {
     @Override
     public int hashCode() {
         return Objects.hash(name);
-    }
-
-    public boolean didBowlingEndAt(final int index) {
-        return frames.getFrames()
-                .get(index)
-                .isEnd();
     }
 }
