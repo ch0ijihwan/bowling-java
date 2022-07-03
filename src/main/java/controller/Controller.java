@@ -1,11 +1,14 @@
 package controller;
 
-import model.BowlingGame;
-import model.player.Player;
-import model.frame.Frames;
 import model.pin.PinCount;
+import model.player.Player;
+import model.player.Players;
 import view.input.Input;
 import view.output.Output;
+
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class Controller {
     private final Input input;
@@ -17,18 +20,25 @@ public class Controller {
     }
 
     public void run() {
-        Player player = new Player(input.inputPlayerName());
-        Frames frames = Frames.createFirst();
-        BowlingGame bowlingGame = new BowlingGame(player, frames);
-        while (bowlingGame.hasNextPitching()) {
-            PinCount knockedPinCount = inputKnockedPinCount(frames);
-            bowlingGame.bowl(knockedPinCount);
-            output.printCurrentStatus(frames, player);
+        int numberOfPlayer = input.inputNumberOfPlayer();
+        List<Player> playerList = IntStream.range(0, numberOfPlayer)
+                .mapToObj(number -> new Player(input.inputPlayerName(number)))
+                .collect(Collectors.toUnmodifiableList());
+        Players players = new Players(playerList);
+
+        output.printCurrentStatus(players);
+        while (players.hasNextPitching()) {
+            players.getPlayers()
+                    .forEach(player -> playFrame(player, players));
         }
+
     }
 
-    private PinCount inputKnockedPinCount(final Frames frames) {
-        int pinCount = input.inputKnockedDownPinCount(frames.getLastFrameIndex());
-        return new PinCount(pinCount);
+    private void playFrame(Player player, Players players) {
+        int lastFrameIndex = player.getFrames().getLastFrameIndex();
+        while (!player.didBowlingEndAt(lastFrameIndex)) {
+            player.bowl(new PinCount(input.inputKnockedDownPinCount(player.getPlayerName())));
+            output.printCurrentStatus(players);
+        }
     }
 }

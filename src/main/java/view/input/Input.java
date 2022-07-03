@@ -1,7 +1,9 @@
 package view.input;
 
 public interface Input {
-    String inputPlayerName();
 
-    int inputKnockedDownPinCount(int currentFrameIndex);
+    int inputNumberOfPlayer();
+    String inputPlayerName(int playerNumber);
+
+    int inputKnockedDownPinCount(String playerName);
 }

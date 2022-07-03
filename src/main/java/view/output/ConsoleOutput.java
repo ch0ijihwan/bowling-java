@@ -3,6 +3,7 @@ package view.output;
 import model.player.Player;
 import model.frame.Frame;
 import model.frame.Frames;
+import model.player.Players;
 
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -14,15 +15,18 @@ public class ConsoleOutput implements Output {
     private static final String EMPTY_FRAME_FORMAT = "      |";
     private static final String ONE_SPACE_FORMAT = "%6s|";
     private static final String LEFT_EMPTY_FORMAT = "|      |";
-    private static final int ALL_FRAME_COUNT = 10;
+    private static final int ALL_FRAME_COUNT = 9;
     private static final int CAN_NOT_CALCULATE_STATE = -1;
 
     @Override
-    public void printCurrentStatus(final Frames frames, final Player player) {
+    public void printCurrentStatus(Players players) {
         System.out.println(BOWLING_SCORE_HEAD_FORMAT);
-        String currentStatus = getCurrentStatus(frames);
-        System.out.printf(createPlayerNameFormat(player) + currentStatus + createEmptyFrameFormat(countEmptyFrame(frames)));
-        System.out.println(createTotalScoreFormat(frames));
+        for (Player player: players.getPlayers()) {
+            String currentStatus = getCurrentStatus(player.getFrames());
+            System.out.printf(createPlayerNameFormat(player) + currentStatus + createEmptyFrameFormat(countEmptyFrame(player.getFrames())));
+            System.out.println(createTotalScoreFormat(player.getFrames()));
+        }
+
     }
 
 
