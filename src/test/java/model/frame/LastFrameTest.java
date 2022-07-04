@@ -25,7 +25,7 @@ class LastFrameTest {
         Frame actual = lastFrame.bowl(new PinCount(10));
 
         //then
-        assertThat(actual.getIndex()).isEqualTo(10);
+        assertThat(actual.getIndex()).isEqualTo(9);
         assertThat(actual.isEnd()).isTrue();
         assertThat(actual.getScoreSymbol()).isEqualTo("X|X|X");
     }
@@ -40,7 +40,7 @@ class LastFrameTest {
         Frame actual = lastFrame.bowl(new PinCount(10));
 
         //then
-        assertThat(actual.getIndex()).isEqualTo(10);
+        assertThat(actual.getIndex()).isEqualTo(9);
         assertThat(actual.isEnd()).isTrue();
         assertThat(actual.getScoreSymbol()).isEqualTo("X|X|X");
     }
@@ -56,7 +56,7 @@ class LastFrameTest {
         Frame actual = lastFrame.bowl(new PinCount(3));
 
         //then
-        assertThat(actual.getIndex()).isEqualTo(10);
+        assertThat(actual.getIndex()).isEqualTo(9);
         assertThat(actual.isEnd()).isTrue();
         assertThat(actual.getScoreSymbol()).isEqualTo("2|/|3");
     }
@@ -97,7 +97,7 @@ class LastFrameTest {
         int actual = lastFrame.getIndex();
 
         //then
-        assertThat(actual).isEqualTo(10);
+        assertThat(actual).isEqualTo(9);
     }
 
     @ParameterizedTest

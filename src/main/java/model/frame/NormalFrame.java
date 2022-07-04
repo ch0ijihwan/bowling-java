@@ -8,8 +8,8 @@ import model.state.running.FirstPitch;
 
 public class NormalFrame implements Frame {
 
-    private static final int FIRST_INDEX = 1;
-    private static final int LAST_INDEX_OF_NORMAL_FRAME = 9;
+    private static final int FIRST_INDEX = 0;
+    private static final int LAST_INDEX_OF_NORMAL_FRAME = 8;
 
     private final int index;
     private BowlingState state;
