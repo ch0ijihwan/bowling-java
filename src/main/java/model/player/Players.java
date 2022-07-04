@@ -1,6 +1,6 @@
 package model.player;
 
-import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Players {
@@ -12,7 +12,7 @@ public class Players {
     }
 
     public List<Player> getPlayers() {
-        return new ArrayList<>(players);
+        return Collections.unmodifiableList(players);
     }
 
     public boolean hasNextPitching() {
