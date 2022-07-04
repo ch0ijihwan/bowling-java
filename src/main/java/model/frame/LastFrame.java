@@ -7,9 +7,7 @@ import model.state.BowlingState;
 import model.state.running.FirstPitch;
 import model.state.status.Status;
 
-import java.util.ArrayDeque;
 import java.util.ArrayList;
-import java.util.Deque;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -22,7 +20,7 @@ public class LastFrame implements Frame {
     public static final int SECOND_STATE_INDEX = 1;
     private static final String DELIMITER = "|";
 
-    private final Deque<BowlingState> states = new ArrayDeque<>();
+    private final List<BowlingState> states = new ArrayList<>();
     private int bowlCount;
 
     private LastFrame() {
@@ -36,17 +34,21 @@ public class LastFrame implements Frame {
 
     @Override
     public Frame bowl(final PinCount pinCount) {
-        BowlingState current = states.getLast();
+        BowlingState current = states.get(getStatesLastIndex());
 
         if (isStrikeOrSpare(current)) {
             bonusBowl(pinCount);
             return this;
         }
 
-        states.removeLast();
+        states.remove(getStatesLastIndex());
         states.add(current.bowl(pinCount));
         bowlCount++;
         return this;
+    }
+
+    private int getStatesLastIndex() {
+        return states.size() - 1;
     }
 
     private void bonusBowl(final PinCount pinCount) {
@@ -71,7 +73,7 @@ public class LastFrame implements Frame {
             return true;
         }
 
-        return bowlCount == MINIMUM_BOWL_COUNT && states.getLast().getStatus() == Status.MISS;
+        return bowlCount == MINIMUM_BOWL_COUNT && states.get(getStatesLastIndex()).getStatus() == Status.MISS;
     }
 
     @Override
@@ -92,12 +94,10 @@ public class LastFrame implements Frame {
     }
 
     private Score calculateScore() throws NotCountScore {
-        Deque<BowlingState> currentStates = new ArrayDeque<>(states);
-        Score score = currentStates.removeFirst()
+        Score score = states.get(FIRST_STATE_INDEX)
                 .createScore();
-        while (!currentStates.isEmpty()) {
-            score = currentStates.removeFirst()
-                    .calculateScore(score);
+        for (BowlingState state : states) {
+            score = state.calculateScore(score);
         }
         return score;
     }
