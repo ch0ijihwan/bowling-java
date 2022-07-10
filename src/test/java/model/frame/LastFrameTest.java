@@ -136,7 +136,7 @@ class LastFrameTest {
     }
 
     @ParameterizedTest
-    @DisplayName("점수를 받아서, 합친 후 반환한다. - 받은 스코어가 추가 득점 기회가 있는 경우")
+    @DisplayName("점수를 받아서 합친 후 반환한다. - 받은 스코어가 추가 득점 기회가 있는 경우")
     @MethodSource("currentScoreParameterProvider")
     void addScoreWhenStrike(final Score currentScore, final int expect) {
         //given
