@@ -1,16 +1,17 @@
-package model.player;
+package model;
 
+import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class PlayerName {
+public class Player {
 
     private static final Pattern NAME_PATTERN = Pattern.compile("^[A-Z]*$");
     private static final int NAME_SIZE = 3;
 
     private final String name;
 
-    public PlayerName(final String name) {
+    public Player(final String name) {
         validatePlayerName(name);
         this.name = name;
     }
@@ -22,7 +23,20 @@ public class PlayerName {
         }
     }
 
-    public String getName() {
+    public String getPlayerName() {
         return name;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Player player = (Player) o;
+        return Objects.equals(name, player.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name);
     }
 }

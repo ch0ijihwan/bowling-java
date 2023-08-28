@@ -3,9 +3,7 @@ package model.frame;
 import model.pin.PinCount;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class Frames {
 
@@ -40,7 +38,7 @@ public class Frames {
     }
 
     public List<Frame> getFrames() {
-        return Collections.unmodifiableList(frames);
+        return new ArrayList<>(this.frames);
     }
 
     public boolean hasNextPitching() {
